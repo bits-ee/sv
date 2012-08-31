@@ -1,0 +1,19 @@
+!!! 5
+%html
+  %head{ :lang => I18n.default_locale }
+    %title= get_title
+    %base{ :href => root_url }
+    %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
+    %meta{ 'name' => 'viewport', :content => 'width=device-width, initial-scale=1.0, user-scalable=no' }
+    = favicon_link_tag 'favicon.png', type: 'image/png'
+    = stylesheet_link_tag 'application'
+    -#= stylesheet_link_tag 'reset', 'typography', 'colors', 'common', 'style', 'tipsy', 'temp'
+    -#= stylesheet_link_tag '/ui/base/jquery.ui.base.min.css', '/ui/base/jquery.ui.theme.min.css', '/ui/base/jquery.ui.datepicker.min.css'#, :cache => 'jquery_ui' #'/ui/base/jquery.ui.all.css'
+    = javascript_include_tag 'application'
+    = javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false'
+    -#= javascript_include_tag 'jquery-1.6.3.min', 'localization', 'jquery.autocomplete', 'jquery.livequery', 'jquery.tipsy', 'jquery.addplaceholder.min', 'jquery.tablesorter.min', 'common', 'application'#, :cache => 'javascripts'
+    -#= javascript_include_tag 'ui/jquery.ui.core.min', 'ui/jquery.ui.datepicker.min'#, :cache => 'jquery_ui'
+    = csrf_meta_tag
+    -#= stylesheet_link_tag 'http://twitter.github.com/bootstrap/assets/css/bootstrap-1.1.1.min.css'
+  %body
+    = yield

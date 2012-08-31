@@ -1,0 +1,24 @@
+!!! 5
+%html
+  %head{ :lang => I18n.locale }
+    %title= @title
+    %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
+  %body{:style => 'background-color: white;'}
+    = t('mail.hello')
+    %br
+    %br
+    #content= yield
+    #footer{:style => 'color: grey;'}
+      %br
+      %br
+      = t('mail.goodbye')
+      #team{:style => 'font-size: larger; font-weight: bold; margin-bottom: 0.3em;color: #FF751A'}
+        = t('support.name')
+      =link_to root_url, root_url, :style => 'color: grey;'
+      %br
+      =mail_to t('mail.info_email'), nil, :style => 'color: grey;'
+    %br
+    %hr
+    %div{:style => 'font-size: smaller; color: grey;'}
+      =t('mail.sent_automatically')
+      ="#{t('mail.admin_disclaimer')} #{link_to t('mail.your_profile_link_title'), edit_user_url(@user.id)}".html_safe if @user and @user.receive_notifications

@@ -1,0 +1,11 @@
+-#%h3= t('comment.add_comment')
+= form_for comment do |f| 
+  -#.label= f.label :title
+  -#=f.text_field :title
+  -#.label= f.label :body
+  = f.text_area :body, :size => '80x5', :placeholder => t('comment.add_comment')
+  = f.hidden_field :commentable_id
+  %br
+  %br
+  = f.submit :value => t('common.add')
+%hr

@@ -1,0 +1,8 @@
+-changed_by = User.find(@project.updated_by)
+="#{link_to changed_by.fullname, user_url(changed_by.id)} #{t('mail.notify.status_changed')} #{link_to @project.name, project_url(@project.id)}.".html_safe
+%br
+%br
+= Project.human_attribute_name(:status)
+%span{:style => 'font-weight: bold;'}="#{t('project.status.' + @project.status.downcase)}"
+=" - #{t('project.status_description.' + @project.status.downcase)}"
+%br

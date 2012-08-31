@@ -1,0 +1,412 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+en:
+  date:
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%d %B %Y'
+      short: ! '%d %b'
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "half a minute"
+      less_than_x_seconds:
+        one:   "less than 1 second"
+        other: "less than %{count} seconds"
+      x_seconds:
+        one:   "1 second"
+        other: "%{count} seconds"
+      less_than_x_minutes:
+        one:   "less than a minute"
+        other: "less than %{count} minutes"
+      x_minutes:
+        one:   "1 minute"
+        other: "%{count} minutes"
+      about_x_hours:
+        one:   "about 1 hour"
+        other: "about %{count} hours"
+      x_days:
+        one:   "1 day"
+        other: "%{count} days"
+      about_x_months:
+        one:   "about 1 month"
+        other: "about %{count} months"
+      x_months:
+        one:   "1 month"
+        other: "%{count} months"
+      about_x_years:
+        one:   "about 1 year"
+        other: "about %{count} years"
+      over_x_years:
+        one:   "over 1 year"
+        other: "over %{count} years"
+      almost_x_years:
+        one:   "almost 1 year"
+        other: "almost %{count} years"
+    prompts:
+      year:   "Year"
+      month:  "Month"
+      day:    "Day"
+      hour:   "Hour"
+      minute: "Minute"
+      second: "Seconds"
+
+  activerecord:
+#
+#      #full_messages:
+#      #  format: "%{attribute} %{message}"
+#
+      # Translate model names. Used in Model.human_name().
+    models:
+        # For example,
+        #   user: "Dude"
+        # will translate User model name to "Dude"
+      # Translate model attribute names. Used in Model.human_attribute_name(attribute).
+
+      user: 'User'
+      contest: 'Contest'
+      project: 'Application'
+      project_doc: 'Document'
+      comment: 'Comment'
+
+    attributes:
+      contest:
+        name: 'Name'
+      project:
+        name: 'Startup project name'
+        avatar: 'Logo'
+        remove_avatar: 'Delete logo'
+        url: 'Website'
+        synopsys: 'Synopsis'
+        market: 'Audience, Market and Customers'
+        business_model: 'Business-model'
+        competitors: 'Competitors'
+        advantages: 'Competitive advantages'
+        technology: 'Technologies'
+        finance: 'Current financing'
+        current_stage: 'Current stage'
+        team: 'Team'
+        city: 'Location'
+        status: 'Application status'
+        video_url: 'Video presentation'
+        details: 'Detailed description'
+        created_at: 'Added'
+      project/project_docs:
+        description: 'File description'
+        doc: 'Document'
+        doc_file_size: 'File size'
+        doc_file_name: 'File name'
+      user:
+        email: 'E-mail'
+        password: 'Password'
+        password_digest: 'Password'
+        new_password: 'New password'
+        password_confirmation: 'Confirm password'
+        name: 'First and lastname'
+        avatar: 'Avatar'
+        avatar_file_size: 'Avatar file size'
+        remove_avatar: 'Delete avatar'
+        is_admin: 'Administrator'
+        current_password: 'Current password'
+        last_login_date: 'Last visit'
+        fullname: 'Username'
+        full_name: 'Username'
+        user_type: 'User type'
+        status: 'User status'
+        about: 'About'
+        feedback: 'Feedback'
+        role: 'Role'
+        group: 'Group'
+        blog: 'Blog'
+        linkedin: 'LinkedIn'
+        twitter: 'Twitter'
+        receive_notifications: 'Agree to receive notifications'
+        group_order_number: 'Order'
+        locale: 'Language'
+      comment:
+        body: 'Comment'
+        title: 'Title'
+        user: 'Author'
+
+  support:
+    name: 'Business Accelerator "Spanish Village"'
+    shortname: 'Spanish Village'
+    twitter_baseurl: 'https://twitter.com/#!/'
+
+  # proprietary
+  common:
+    default_page_title: ''
+    main: 'Home'
+    home: 'Back to Home'
+    menu: 'Menu'
+    menu_what: 'What?'
+    menu_where: 'Where?'
+    menu_how: 'How?'
+    menu_who: 'Who?'
+    apply: 'Apply'
+    save: 'Save'
+    delete: 'Delete'
+    submit: 'Submit'
+    download: 'Download'
+    show: 'Show'
+    saved: 'Changes successfully saved'
+    calendar: 'Calendar'
+    partially_unsaved: 'Changes are partially unsaved'
+    add: 'Add'
+    invalid_params: 'Invalid URL. You were redirected to homepage.'
+    ok: 'OK'
+    or: 'or'
+    error: 'Oops.. seems here is a bug!'
+    back: 'back'
+    ago: 'ago'
+    edit: 'Edit'
+    view: 'Show'
+    cancel: 'Cancel'
+    download_pdf: 'Save as PDF'
+    yes_: 'yes'
+    no_: 'no'
+    signup: 'Sign Up'
+    doesnt_match: 'does not match'
+    too_large_attachment: 'can not exceed %{max}MB.'
+    skype:
+      call: 'call'
+      chat: 'chat'
+    avatar:
+      description: 'supported file formats: png, jpg, gif; max. file size: '
+    too_long: 'is too long.'
+    description: 'Russian first international business accelerator and seed investment fund conducted twice a year in Spain'
+    keywords: 'startup, startup incubator, startup accelerator, business idea, business project, seeking investor, venture investments, seed investments, , web development projects, seed fund'
+    homepage: 'back to home'
+    synopsis_line1: 'Business accelerator and seed investment fund'
+    synopsis_line2: 'to help put new ideas in the sphere of information technology into action.'
+    deadline: 'Deadline for project submission: <b>%{date}</b>; <b>%{distance}</b> left.'
+    deadline_today: 'Deadline for project submission is today!'
+    deadline_overdue: 'Please hold on, winners will be announced soon!'
+    magnify: 'magnify'
+    news: 'News and Events'
+    apply_now: 'Apply Now'
+    feedback: 'Contact Us'
+    disclaimer: 'Privacy Policy'
+
+  content:
+    who: 'Russian and foreign experts who possess up-to-date knowledge and experience of successful business foundations will help put your idea into practice.'
+    how: 'Your team will spend three months working on your project to make it ready to be presented to investors and put on the market.'
+    where: 'The Spanish Village business accelerator is located on the scenic coast of sunny Spain, far from the hustle and bustle of everyday life, and surrounded by picturesque nature.'
+    what:  'A unique opportunity to bring your internet project, computer or online game, e-business solution or mobile application to life.'
+    company: 'OpenPriority LLC'
+    address: '121170 Moscow, Kutuzovsky pr. 36, bld 3, 508'
+    phone: '+7 (495) 647-79-50 or&nbsp;'
+    season2011: 'Season 2011'
+
+  mail:
+    hello: 'Hello!'
+    goodbye: 'Best regards'
+    info_email: 'info@spanish-village.com'
+    noreply: 'noreply@spanish-village.com'
+    sent_automatically: 'This e-mail was sent automatically.'
+    your_profile_link_title: 'your profile'
+    admin_disclaimer: 'As a site admin, you got this e-mail because of setting of your user prfile'
+    notify:
+      project_updated: 'updated his/hers application'
+      project_added: 'submitted his/her application'
+      status_changed: 'changed status of application'
+      admin_changed_status: 'Status of your application was changed by administration of "Spanish Village"'
+    invites: 'invited you to join "Spanish Village"'
+    accept_invite: 'Please proceed the link below to accept invitation and sign up.'
+    contribute_more: 'We advise you to add more details to your application.'
+    goto_project: 'Go to application'
+    reset_password: 'We have got a password reset request for your user account on "Spanish Village" business accelerator homepage. In case you does not wish to change your current password, just ignore this message and it will remain the same. To reset current password and change it please proceed the link below.'
+    welcome: 'Thank you for registering at "Spanish Village" business accelerator!'
+    fill_profile: 'Please start from providing more details about yourself on your personal profile page.'
+    title:
+      user_registration: 'New user registration'
+      you_are_invited: 'Invitation'
+      password_reset_instructions: 'Password reset request'
+      project_status_change: 'Application status changed'
+      new_project_added: 'New application'
+      public_project_changed: 'Application updated'
+
+  project:
+    projects: 'Applications'
+    candidates: 'Candidates'
+    show_more: 'Show all'
+    your_project_name: 'Free!'
+    your_project_synopsys: 'Your startup could be here'
+    registered: 'Application for "%{name}" project was added successfully!'
+    name: 'Project name'
+    project: 'Application'
+    my_project_info: 'About my project'
+    participants: 'Project participants'
+    invite_user: 'Invite user'
+    put_reject_reason: 'Explain your decision'
+    deleted: 'Application "%{name}" was deleted.'
+    reason: 'Reason'
+    delete_confirm: 'Are you sure you want to delete this application, including attachments, author profile and comments?'
+    choose_new_status: "-- select new status --"
+    status:
+      draft: 'draft'
+      added: 'new'
+      disabled: 'disabled'
+      published: 'published'
+      selected: 'selected'
+      short_listed: 'shortlisted'
+      rejected: 'rejected'
+      resubmitted: 'resubmitted'
+    status_description:
+      draft: 'Application is not completed yet.'
+      added: 'Application is submitted and is in moderation queue.'
+      disabled: 'Application is declined and its editing is disabled'
+      published: 'Application is accepted and published'
+      selected: 'Application is selected for further development'
+      short_listed: 'Congratulations! Your project is chosen!'
+      rejected: 'Application was rejected'
+      resubmitted: 'Application resubmitted for moderation'
+    status_todo:
+      disable: 'disable'
+      publish: 'publish'
+      select: 'select'
+      put_to_short_list: 'winner'
+      reject: 'reject'
+    set_new_status: 'Set new status'
+    read_only_public_fields: 'Your application was published. You can not change form field values, which are available for all site visitors.'
+    ready_to_publish: 'Application updated and ready for publishing.'
+    save_draft:
+      button: 'Save as a draft'
+      description: 'Your application will not be submitted for moderation. You may continue to fill in the form at any time.'
+    publish_project:
+      button: 'Submit for moderation'
+      description: 'Your application will be submitted to moderation queue. It will be accepted and published to the website if there is enough details to make a decision. You still may edit yor application after submit.'
+    just_save:
+      description: 'Save'
+
+    documents:
+      documents: 'Documents'
+      description1: 'All attached files will be accessible only by accelerator administrating staff'
+      description2: 'If available, please provide a business plan, any presentation materials, a financial economic model, the results of the researches or expertise, patents and utility model certificates, designs or interface projects.'
+      description3: 'Max file size: '
+    private_details: 'Private information (for you and staff only)'
+    public_details: 'Public information (for all site visitors)'
+    descriptions:
+      url: 'Project website or URL if it is already registered'
+      synopsys: 'Describe in 140 characters the main purpose of the project: what kind of technology, product or service will be created as a result of its implementation? What is the novelty value of it, what problem do you solve for the users?'
+      details: 'Describe your project in detail. Try to describe as accurately as possible the main characteristics of the project and its functionality.'
+      market: 'What is your project’s market orientation? Does the potential market has territorial, age or other limits? Can you estimate the size of the market - in users or money? What is it? What are your potential users, how can  you describe them? Describe the portrait of the target consumer. If you already have clients or there are companies ready to become your customers, please tell us what they are and how many of them you have.'
+      business_model: 'Describe how the project will make money, who and how will pay. Will it be a freemium, a subscription, advertising sales, % off the transactions or anything else? If you plan to monetize the project in stages or in several different ways, please describe each of them'
+      competitors: 'Enumerate some similar ongoing projects that can replace the product or service you work on. If you are not aware of the similar ongoing projects, may be you know about some analogous start-ups that are currently being developed in other incubators.'
+      advantages: 'n what way is your project different from those of the competitors? Where does it surpass them? What does it offer at a totally new level? When developing the project, what will you focus on to beat the competitors? If there are no direct competitors at the moment, try to assess how easy it is for someone to create the clone of your project, once it is launched - what feature of your project can protect it from the clone emergence?'
+      technology: 'Enumerate the technologies involved in the project - programming languages, databases, platforms, etc.'
+      finance: 'Who’s currently providing your project funding and what’s the amount of it? How much money did your team and you invest in the project? Have your friends, relatives, colleagues or head management provided any help? If yes, what was the size of it and under what terms was it granted? Tell us about already attracted investors or business angels. If you ever received any grants or funding in other incubators or accelerators, in state programs or funds, please indicate the source of it, the amount and the terms. What did you spend the preliminary investment on? '
+      current_stage: 'Do you regularly work on the project? What project documentation do you possess at the moment: patents, licenses, expertise or market research results? Is the project a technopark resident? Has the project been mentioned in any e-media? Is there a blog or a Twitter account about the project? If yes, please provide the links.'
+      team: 'Do you have the project team put together? Tell us about the role of each team member, don’t forget about yourself - what majors you have, your experience in business and IT, foreign languages that you speak. Please mention if any team member had previous experience in business or start-up projects: we’d like to know about any experience, whether it was successful or not so much. Provide links to the team members’ profiles on LinkedIn and other social networks, developers’ communities, to their blogs or Twitter accounts.'
+      city: 'Team’s place of residence (city, country)'
+      video_url: 'We suggest that you add a link to a video about the project or the team to your presentation'
+      private: 'NB! All the following information will only be accessible to the organizers and will not be published on the website.'
+      public: 'NB! All the following information will be available for all visitors through open access on the website.'
+
+  comment:
+    comments: 'Comments'
+    add_comment: 'Comment'
+
+  user:
+    login: 'Username (login):'
+    users: 'Users'
+    signup_form: 'Sign Up'
+    enter: 'Enter'
+    logout_notice: 'Bye!'
+    status:
+      active: 'active'
+      disabled: 'disabled'
+      invited: 'invited'
+    status_todo:
+      activate: 'activate'
+      activate_title: 'Activate user.'
+      disable: 'disable'
+      disable_title: 'Disable user. He/she will not be able to sign in anymore.'
+    user_type:
+      lector: 'Expert'
+      regular: 'Applicant'
+      priority: 'OpenPriority'
+    user_groups:
+      nobody: '--no group--'
+      orgs: 'Organizers'
+      admins: 'Administration'
+      lectors: 'Experts'
+      mentors: 'Mentors'
+      guests: 'Guests'
+      alumnis: 'Graduates'
+    descriptions:
+      role: 'or country of residence'
+      skype: 'We need it to be in touch with you'
+      about: 'For example: education, experience, achievements, date of birth, contact phone number, dreams, expectations regarding the accelerator.'
+      about_en: 'Текст для страницы "Кто?" на английском'
+      about_es: 'Текст для страницы "Кто?" на испанском'
+      feedback: 'Please leave your feedback about the Spanish Village accelerator.'
+      orgs: 'The Spanish Village business accelerator was created on the initiative and with direct involvement of Dmitri Parshkov and Vladimir Vagin. They are the first investors ready to believe in your project and provide established seed investments. They make decisions on all the key issues, determine the direction and format of the operation of business accelerators and always keep in touch with the participants; they are the first to celebrate the participants’ success and to empathise if there are any problems or difficulties. The organizers guarantee that the business accelerator will be efficient for all the selected projects.'
+      admins: 'The issues concerning the organization of everyday activities of the Spanish Village business accelerator and the providing of its participants with everything they need are in the sphere of competence of the administration. The professional staff are energetic and empathic; they will solve any problem and create a friendly atmosphere. It is their job to make the life of developers and mentors easy and comfortable. They are also responsible for the organization of cultural and sporting activities.'
+      lectors: 'A group of guest mentors helps the participants of the project translate their ideas into reality in the right way and make them convincing, define the target audience and find the shortest way to their conviction, as well as develop the most efficient monetization method. They share their experience of successful business organization and development with the developers, provide counselling on technical and marketing issues, explain the rules of the game on the global start-up market and teach the participants to interact with investors. These people are competent authorities in their field, acknowledged professionals and successful businessmen.'
+      mentors: ''
+      guests: ''
+      alumnis: 'he first season of the accelerator took place in December 2011. The leaders of the six teams that participated in the program of the Fall 2011season will be happy to share their experience and give advice to the new entrants.'
+      blog: 'Blog'
+      linkedin: 'LinkedIn'
+      twitter: 'Twitter'
+      receive_notifications: 'I agree to receive e-mail notifications about new applications, updates in published applications and status changes.'
+      group_order_number: 'Position on "Who?" page'
+      locale: 'Site language'
+
+    admin: 'administrator'
+    last_admin: ': You are the last user with administration privileges on this website. Before proceeding, please delegate administrator role to any other user'
+    welcome: 'Welcome, %{fullname}'
+    logout: 'Log out'
+    login: 'Log in'
+    wrong_credentials: 'Username and password combination failed. Check that your are using right language and CAPS LOCK is off.'
+    get_new_password: 'Reset password'
+    reset_mail_sent: "Check your e-mail (%{email}) for instruction about how to reset your password."
+    set_new_password: 'Set new password'
+    invite: 'Invite a user'
+    add_priority_user: 'Add OpenPriority staff member'
+    add: 'Add a user'
+    add_lector: 'Add an expert'
+    added_lector: 'Expert %{fullname} is already added'
+    added: "User %{email} is already exist"
+    added_by: 'Added by %{whom}'
+    not_saved: "Failed to save user %{email}"
+    access_denied: 'Access is denied'
+    set_email_name: 'Enter e-mail or name of the user.'
+    email_already_used: 'is already used by other user'
+
+    profile:
+      view_profile: "View profile"
+      edit_profile: "Edit profile"
+      user_info: "User info"
+      change_password: "Change password"
+    invitation:
+      invited: "%{fullname} is invited"
+      not_found: "%{email} not found"
+      already_invited: "User %{email} is already invited to '%{project}'"
+    wrong_current_password: "does not match"
+    password_changed: 'password changed'
+    forgot_password:
+      title: 'Forgot password?'
+      user_not_found: 'User not found or account disabled.'
+      invalid_email: 'Invalid e-mail.'
+    third_party_login: "Or use your social network"
+    third_party_signup: "Or use your social network"
+    third_party_invalid_credentials: "Outdated credentials."
+    third_party_cant_add_avatar: 'Unable to obtain avatar.'
+    third_party_error: "Failed to authorise using selected social network. Please try again."
+    third_party_login_providers:
+      facebook: 'Facebook'
+      google_oauth2: 'Google'
+      vkontakte: 'В контакте'
+
+  contest:
+    export_to_xls: 'Export to XLS'
+    export_error:
+      project: "Failed to export data, please check application details "
+      user: "Failed to export data, please check user details "
+
+  dashboard:
+    title: 'Dashboard'
+    highlighted: 'New and resubmitted'
+    last_comments: 'Last %{count} comments'

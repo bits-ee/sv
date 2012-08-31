@@ -1,0 +1,11 @@
+-title t('user.signup_form')
+- if @user.is_lector?
+  = render :partial => 'users/new_lector'
+- elsif @user.is_priority?
+  -if @user.persisted?
+    = render :partial => 'users/new_priority'
+  -else
+    = render :partial => 'users/new_invite_priority'
+- else
+  = render :partial => 'users/new_regular'
+%br

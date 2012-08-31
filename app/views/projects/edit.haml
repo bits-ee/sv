@@ -1,0 +1,313 @@
+- title @project.name
+- content_for :side_menu do
+  %ul.unstyled.progress-menu
+    - section_list = ['name', 'url', 'video_url', 'synopsys', 'city', 'details', 'team', 'business_model', 'market', 'competitors', 'advantages', 'technology', 'finance', 'current_stage']
+    - section_list.each do |section|
+      %li{ class: "#{dom_class(@project)}_#{section}_section" }= link_to t("activerecord.attributes.project.#{section}"), {anchor: "#{dom_class(@project)}_#{section}_section"}, {class: 'shallow'}
+
+%h2= ("#{@project.contest.name} &rarr; #{@project.name}").html_safe
+%br
+%section.show
+  = form_for @project, :html => {:class => "column-form track-progress#{(current_user.is_regular? and !@project.is_public?) ? ' ajax-form-autosave' : nil}", :multipart => true} do |f|
+    -#%br
+    -#%h3.inline{:style => 'margin-right: 1em;'}= t("project.my_project_info").capitalize
+    -#%span<>
+    -#  = f.submit(t('common.save'))
+    -#  -# + "&nbsp;#{t('common.or')}&nbsp;".html_safe + link_to(t('common.cancel'), :back)
+    -# if current_user.project_id == @project.id and @project.is_rejected?
+    -#  = check_box_tag :resubmit, 'yes', true, :style => 'margin-left: 1em;'
+    -#  = label_tag :resubmit, t('project.ready_to_publish')
+    - if current_user and current_user.can_see_all_of(@project.id)
+      .label= f.label :status
+      .field{ :class => project_status_color(@project.status) }
+        = t("project.status.#{@project.status.downcase}")
+        .description.brevier.inline{:style => 'margin-left: 2em;'}= t("project.status_description.#{@project.status.downcase}")
+    - if current_user and current_user.is_admin?
+      .label= f.label :status, t('project.set_new_status')
+      - options = [[t('project.choose_new_status'), nil, :style => 'color: #999']]
+      - Project.change_status_rules[@project.status].each do |new_status|
+        - options << ["#{t('project.status.' + new_status.downcase)} - #{t('project.status_description.' + new_status.downcase)}".html_safe, new_status, :class => project_status_color(new_status)]
+      = f.select :status, options_for_select(options)
+      %br
+      = text_area_tag :reason, nil, {:size => "80x5", :placeholder => t('project.put_reject_reason'), :style => 'margin: 1em 0em; display: none'}
+    %br
+    .not-publish
+      %h3= t('project.public_details')
+      .brevier
+        = t('project.descriptions.public')
+        -if current_user and current_user.is_owner_of_public_project? @project
+          .red
+            =t('project.read_only_public_fields')
+    %br
+    %div{ id: "#{dom_class(@project)}_avatar_section"}
+      .label= f.label :avatar
+      = image_tag @project.avatar.url(:medium), :style => 'max-width: 100%;'
+      %br
+      - unless current_user and current_user.is_owner_of_public_project? @project
+        - if @project.avatar_file_name.present? and !@project.avatar.dirty?
+          = f.check_box(:remove_avatar) + "&nbsp;".html_safe + f.label(:remove_avatar)
+          %br>
+        - else
+          .field
+            .description.brevier= "#{t('common.avatar.description')} #{number_to_human_size(1.megabyte)}"
+            = f.file_field :avatar
+    %br
+    %div{ id: "#{dom_class(@project)}_name_section"}
+      .label= f.label :name
+      .field
+        -if current_user and current_user.is_owner_of_public_project? @project
+          .great-primer.strong= @project.name
+        -else
+          = f.text_field :name, {:class => 'wide'}
+    %div{ id: "#{dom_class(@project)}_url_section"}
+      .label= f.label :url
+      .field
+        .description.brevier= t('project.descriptions.url')
+        -if current_user and current_user.is_owner_of_public_project? @project
+          =@project.url.blank? ? nil : link_to(@project.url, @project.url, rel: 'external')
+        -else
+          = f.text_field :url, {:class => 'wide'}
+    %div{ id: "#{dom_class(@project)}_video_url_section"}
+      .label= f.label :video_url
+      .field
+        .description.brevier= t('project.descriptions.video_url')
+        -if current_user and current_user.is_owner_of_public_project? @project
+          =@project.video_url.blank? ? nil : link_to(@project.video_url, @project.video_url, rel: 'external')
+        -else
+          = f.url_field :video_url, {:class => 'wide'}
+    %div{ id: "#{dom_class(@project)}_synopsys_section"}
+      .label= f.label :synopsys
+      .field
+        .description.brevier= t('project.descriptions.synopsys')
+        -if current_user and current_user.is_owner_of_public_project? @project
+          = @project.synopsys
+        -else
+          = f.text_area :synopsys, :size => "80x3"
+    %div{ id: "#{dom_class(@project)}_city_section"}
+      .label= f.label :city
+      .field
+        .description.brevier= t('project.descriptions.city')
+        -if current_user and current_user.is_owner_of_public_project? @project
+          = @project.city
+        -else
+          = f.text_field :city, {:class => 'wide'}
+    %br
+    -if current_user and current_user.can_see_all_of(@project.id)
+      .not-publish
+        %h3= t('project.private_details')
+        .brevier= t('project.descriptions.private')
+      %br
+      %div{ id: "#{dom_class(@project)}_details_section"}
+        .label= f.label :details
+        .field
+          .description.brevier= t('project.descriptions.details')
+          = f.text_area :details, :size => "80x5"
+      %div{ id: "#{dom_class(@project)}_team_section"}
+        .label= f.label :team
+        .field
+          .description.brevier= t('project.descriptions.team')
+          = f.text_area :team, :size => "80x5"
+      %div{ id: "#{dom_class(@project)}_business_model_section"}
+        .label= f.label :business_model
+        .field
+          .description.brevier= t('project.descriptions.business_model')
+          = f.text_area :business_model, :size => "80x5"
+      %div{ id: "#{dom_class(@project)}_market_section"}
+        .label= f.label :market
+        .field
+          .description.brevier= t('project.descriptions.market')
+          = f.text_area :market, :size => "80x5"
+      %div{ id: "#{dom_class(@project)}_competitors_section"}
+        .label= f.label :competitors
+        .field
+          .description.brevier= t('project.descriptions.competitors')
+          = f.text_area :competitors, :size => "80x5"
+      %div{ id: "#{dom_class(@project)}_advantages_section"}
+        .label= f.label :advantages
+        .field
+          .description.brevier= t('project.descriptions.advantages')
+          = f.text_area :advantages, :size => "80x5"
+      %div{ id: "#{dom_class(@project)}_technology_section"}
+        .label= f.label :technology
+        .field
+          .description.brevier= t('project.descriptions.technology')
+          = f.text_area :technology, :size => "80x5"
+      %div{ id: "#{dom_class(@project)}_finance_section"}
+        .label= f.label :finance
+        .field
+          .description.brevier= t('project.descriptions.finance')
+          = f.text_area :finance, :size => "80x5"
+      %div{ id: "#{dom_class(@project)}_current_stage_section"}
+        .label= f.label :current_stage
+        .field
+          .description.brevier= t('project.descriptions.current_stage')
+          = f.text_area :current_stage, :size => "80x5"
+      %br
+      %br
+      .not-publish
+        %h3= t('project.documents.documents')
+        .description.brevier
+          %span= t('project.documents.description1')+t('project.documents.description2')
+          %br>
+          %span= t('project.documents.description3') + number_to_human_size(5.megabytes)
+        - (3 - @project.project_docs.size).times{ @project.project_docs.build }
+        = f.fields_for :project_docs do |project_doc|
+          .project-doc<
+            - unless project_doc.object.new_record?
+              = link_to project_doc.object.doc.url, :class => 'with-image' do
+                = document_icon(project_doc.object.doc.content_type)
+                %span>= project_doc.object.doc.original_filename
+              = "&nbsp;(#{number_to_human_size(project_doc.object.doc.size)});".html_safe
+              = project_doc.object.description
+              %span<
+                = "#{project_doc.check_box :_destroy}&nbsp;#{project_doc.label :_destroy, t('common.delete')}".html_safe
+            - else
+              %span<>
+                = project_doc.file_field :doc
+                = project_doc.text_field :description, :placeholder => ProjectDoc.human_attribute_name(:description), :class => 'wide'
+                - if project_doc.object.errors.size > 0
+                  = "#{project_doc.check_box :_destroy}&nbsp;#{project_doc.label :_destroy, t('common.delete')}".html_safe
+    %br
+    %br
+    - if current_user.project_id == @project.id
+      - if (@project.is_rejected? or @project.is_draft? or @project.changed_attributes['status'] == Project.status_draft or @project.changed_attributes['status'] == Project.status_rejected)
+        = f.submit t('project.save_draft.button'), :title => t('project.save_draft.description')
+        = f.submit t('project.publish_project.button'), :style => 'margin-left: 2em;', :title => t('project.publish_project.description')
+      - else
+        = f.submit t('common.save'), :title => t('project.just_save.description')
+    - else
+      = f.submit t('common.save')
+  %br
+-#.widget
+-#  %section
+-#    %div
+-#      %h3
+-#        =t('project.participants')
+-#      - @users = User.where(:project_id => @project.id)
+-#      %table{:style => 'border: 1px solid black;'}
+-#        %thead
+-#          %tr
+-#            %th{:style=>'width: 200px;'}= t('user.email')
+-#            %th{:style=>'width: 200px;'}= t('user.last_login_date')
+-#        %tbody
+-#          - for user in @users
+-#            %tr
+-#              %td{:style=>'width: 200px;'}= user.fullname
+-#              %td{:style=>'width: 200px;'}= user.last_login_date == nil ? t("user.status.#{user.status.downcase}") : l(user.last_login_date, :format => :short)
+-#      %br
+-#      %br
+-#      %a{:id => 'invite_user'}
+-#      %h3
+-#        =t("project.invite_user")
+-#      - @user = User.new(:project_id => @project.id) unless @user #(:user_type => User.type_regular, :status => User.status_invited) unless @user
+-#      = form_for @user, :html => {:class => 'column-form'} do |f|
+-#        .label
+-#          =f.label :email
+-#        =f.text_field :email
+-#        =f.hidden_field :project_id
+-#        %br
+-#        %br
+-#        =f.submit t('project.invite_user')
+-#      %br
+-#      %br
+%br
+:javascript
+  $(function(){
+    // completeness pull
+    (function(selector){
+      // defaults
+      var selector = typeof(selector) !== 'undefined' ? selector : '.ajax-form-autosave';
+      var $__forms = $(selector);
+      $__progress_menu = $('.progress-menu');
+
+      // initialize
+      $__forms.find('input, textarea').each(function(){
+        var __identifier = '.'+$(this).attr('id')+'_section';
+        if($(this).val().length > 0){
+          $__progress_menu.find(__identifier).addClass('filled');
+        }else{
+          $__progress_menu.find(__identifier).removeClass('filled');
+        }
+      });
+
+      // delegate
+      $__forms.delegate("input, textarea", "change", function(event){
+        var __identifier = '.'+$(this).attr('id')+'_section';
+        if($(this).val().length > 0){
+          $__progress_menu.find(__identifier).addClass('filled');
+        }else{
+          $__progress_menu.find(__identifier).removeClass('filled');
+        }
+      });
+    })('.track-progress');
+
+    // ajax form autosave
+    (function(selector, interval){
+      // defaults
+      var selector = typeof(selector) !== 'undefined' ? selector : '.ajax-form-autosave';
+      var interval = typeof(interval) !== 'undefined' ? interval : 30*1000;
+      var $__forms = $(selector);
+
+      // interval
+      var interval_handle = setInterval(function(){
+        // TODO: only update dirty form
+        $__forms.each(function(){
+          var $__this_form = $(this);
+
+          // check if need to save
+          var need_update = false;
+          $__this_form.find('input, textarea').each(function(){
+            if(this.value !== this.defaultValue){
+              need_update = true; return;
+            }
+          });
+          if(need_update === false){ return; }
+
+          // save
+          $.ajax({
+            type: 'PUT',
+            cache: false,
+            url: $__this_form.attr('action'),
+            data: $__this_form.serialize(),
+            dataType: 'json',
+            //beforeSend: function(){
+            //  return false;
+            //},
+            error: function(xhr, status, error){
+              var error_fields = eval('('+xhr.responseText+')'); //
+              if(typeof(error_fields) === 'object'){             // expect JSON
+                for(var field in error_fields){
+                  if(error_fields.hasOwnProperty(field)){
+                    $__this_form.find('[id$="_'+field+'"], [for$="_'+field+'"]').addClass('field_with_errors');
+                    $__this_form.find('[id$="'+field+'_error"]').html(error_fields[field].join(', '));
+                  }
+                }
+              }
+            },
+            success: function(data, status, xhr){
+              // TODO:
+              $__this_form.find('.field_with_errors').removeClass('field_with_errors');
+              $__this_form.find('[id$="_error"]').html('');
+              $__this_form.find('input, textarea').each(function(){
+                if(this.value !== this.defaultValue){
+                  this.defaultValue = this.value;
+                }
+              });
+            },
+            //complete: function(){
+            //
+            //}
+          });
+        });
+      }, interval);
+    })('.ajax-form-autosave', 10000);
+  });
+- if @track_new_project_event
+  :javascript
+    $(function(){
+      $.track({
+        category: 'project',
+        action: 'new',
+        label: "#{@project.name}"
+      });
+    });

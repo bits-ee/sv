@@ -1,0 +1,12 @@
+-title @contest_name
+%article.row
+  .span12
+    %header.row
+      .span12
+        %h2{:style => 'font-weight: bold;'}= @contest_name.mb_chars.capitalize.to_s + '. ' + t('project.candidates')
+        %br
+    - (@projects.length/4).times do |group|
+      .row
+        - @projects[(4 * group)..(4 * group + 3)].each do |project|
+          =render :partial => 'pages/project_summary', :locals => {:project => project}
+      %br

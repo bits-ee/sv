@@ -1,0 +1,88 @@
+.row
+  %section.span3{ style: 'color: #999' }
+    %h2= link_to t('common.menu_what'), what_path, style: 'color: #333'
+    %span= t('content.what').html_safe
+  %section.span3{ style: 'color: #999' }
+    %h2= link_to t('common.menu_who'), who_path, style: 'color: #333'
+    %span= t('content.who').html_safe
+  %section.span3{ style: 'color: #999' }
+    %h2= link_to t('common.menu_how'), how_path, style: 'color: #333'
+    %span= t('content.how').html_safe
+  %section.span3{ style: 'color: #999' }
+    %h2= link_to t('common.menu_where'), where_path, style: 'color: #333'
+    %span= t('content.where').html_safe
+%br
+.row
+  .span12
+    #gallery
+      .item
+        .watermark= t('common.magnify')
+        = image_tag 'front_1.jpg'
+      .item
+        .watermark= t('common.magnify')
+        = image_tag 'front_2.jpg'
+      .item
+        .watermark= t('common.magnify')
+        = image_tag 'front_3.jpg'
+      .item
+        .watermark= t('common.magnify')
+        = image_tag 'front_4.jpg'
+      .item
+        .watermark= t('common.magnify')
+        = image_tag 'front_5.jpg'
+      .item
+        .watermark= t('common.magnify')
+        = image_tag 'front_6.jpg'
+      .item.wide
+        .watermark= t('common.magnify')
+        = image_tag 'front_7.jpg'
+%br
+%section.row
+  .span12
+    .row
+      %header.span12
+        - if @show_link
+          %h2= link_to "#{@contest_name.mb_chars.capitalize}. #{t('project.candidates')}", contest_path(@contest_id)
+        - else
+          %h2= "#{@contest_name.mb_chars.capitalize}. #{t('project.candidates')}"
+        %br
+    -(@projects.length/4).times do |group|
+      .row
+        - @projects[(4 * group)..(4 * group + 3)].each do |project|
+          = render :partial => 'project_summary', :locals => {:project => project}
+  .span12
+    .row
+      %nav.span12
+        %h5= link_to t('project.show_more'), contest_path(@contest_id), style: 'color: #333; font-weight: bold;' if @show_link
+%br
+%br
+%section.row
+  .span12
+    %h2= t('common.news')
+    = render :partial => 'facebook'
+%br
+%section.row{ style: 'background: #f6f6f6; margin-right: -30px' }
+  = image_tag 'shadow_down.png', style: 'display: block; height: 10px; width: 100%;'
+  .span12{ style: 'margin-right: 30px'}
+    %h2{ style: 'color: #333;' }= t('common.feedback')
+    .row
+      %address.span4{ style: 'color: #666' }
+        %pt12.strong{style: 'color: #333;'}= t('content.company').html_safe
+        %div= t('content.address')
+        %div<
+          %span.nowrap<
+            =t('content.phone').html_safe
+          = link_to image_tag('icons/skype.png', size: '16x16', style: 'vertical-align: middle'), 'skype:spvill?chat', :title => t('common.skype.chat')
+        %br
+        %div
+          = mail_to t('mail.info_email'), t('mail.info_email'), :style => 'color: #333'
+          %br>
+          = link_to 'http://www.facebook.com/spanishvillage', :class => 'with-image' do
+            = image_tag 'icons/facebook.png', size: '16x16', style: 'vertical-align: middle'
+            %span{ style: 'color: #266caf'}> spanishvillage
+        %br
+        %div
+          = link_to image_tag('logo_priority.png'), 'http://www.openpriority.com', style: 'margin-right: 2em'
+      .span8{ style: 'padding-top: 0.5em' }
+        = image_tag 'https://maps.googleapis.com/maps/api/staticmap?center=55.74022,37.52608&&markers=color:0xff6600|55.74022,37.52608&zoom=15&size=530x200&maptype=roadmap&sensor=false'
+        .float-right= link_to image_tag('avs_icon.png'), 'http://www.arteverumstudio.com'

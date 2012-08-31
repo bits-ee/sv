@@ -1,0 +1,37 @@
+%section.row
+  .span12
+    .row
+      .span12
+        %h3{ style: 'color: #333' }= type_title
+        %em{ style: 'color: #666' }= type_description
+    %br
+    .row
+      - users.each_with_index do |user, i|
+        %section.person-description.span6
+          .float-left{ style: 'width: 100px; margin-right: 10px' }
+            = image_tag user.avatar.url(:thumb)
+          .float-left{ style: 'width: 250px' }
+            %h6{ style: 'color: #333'}>
+              -if I18n.locale.to_s == 'en'
+                = user.name_en
+              -elsif I18n.locale.to_s == 'es'
+                = user.name_es
+              -else
+                = user.name
+            = social_icons(user)
+            %em
+              -if I18n.locale.to_s == 'en'
+                = user.role_en
+              -elsif I18n.locale.to_s == 'es'
+                = user.role_es
+              -else
+                = user.role
+            %br>
+            %br
+            %span
+              -if I18n.locale.to_s == 'en'
+                = user.about_en
+              -elsif I18n.locale.to_s == 'es'
+                = user.about_es
+              -else
+                = user.about

@@ -1,0 +1,122 @@
+#userinfo
+  .dropdown-menu
+    :list-style none !important
+    :z-index 100
+    //:background-color hsl(45, 0%, 80%)
+    :background-color #eee
+    :float left
+    :display none
+    :position absolute
+    //:left 350px
+    :margin-left -1em
+    :margin-right 0
+    :margin-top 0.3em
+    //:padding 6px 0
+    :zoom 1
+    :border-color #ccc
+    //:border-color hsl(45, 40%, 65%)
+    :border-style solid
+    :border-width 0 1px 1px
+    //:border-radius 0 0 6px 6px
+    :box-shadow 0 2px 3px rgba(0, 0, 0, 0.1)
+    :background-clip padding-box
+    > li
+      :white-space nowrap
+      :list-style none
+      &.divider
+        :height 1px
+        :margin 0.5em 0
+        :overflow hidden
+        :border-color #ccc
+        //:background-color hsl(45, 40%, 65%)
+        :border-bottom 1px solid rgba(0,0,0,0.2)
+      &:hover
+        //:background hsl(45, 40%, 70%)
+        :background #ddd
+      > a
+        :display block
+        :float none
+        :padding 0.2em 1em
+        :text-decoration none
+        :color #666
+  .open
+    :display block
+
+ul.tabs
+  :border-bottom 2px solid #666
+  :margin 0
+  li
+    // background color bleed
+    :-webkit-background-clip padding-box
+    :-webkit-user-select none
+    :text-align center
+    :display inline-block
+    :min-width 4em
+    :padding 0.2em 0.5em
+    :margin-right 0.5em
+    :border-top-left-radius 0.3em 0.3em
+    :border-top-right-radius 0.3em 0.3em
+    :color #fff
+    :background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), to(#dddddd))
+    :text-shadow #fff 0px 1px 0px
+    :-webkit-box-shadow inset 1px 1px 0px #fff
+    :border-width 1px 1px 0 1px
+    :border-style solid
+    :border-color #ccc #999 #999 #ccc
+    a
+      :display inline-block
+      :width 100%
+      :color #666 !important
+    &:hover
+      :background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f0f0f0), to(#d6d6d6))
+      a
+        :color #444
+
+  li.active
+    //:background #666
+    :background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#aaa), to(#666))
+    :text-shadow #666 0px -1px 0px
+    :-webkit-box-shadow inset 0 0 0
+    :border-color #999 #666 #333 #999
+    a
+      :text-shadow #555 0px -1px 0px
+      :color #fff !important
+      :text-decoration none
+
+.red
+  color: red
+.green
+  color: green
+.yellow
+  //color: #ffdd00
+
+.not-publish
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1)
+  -webkit-box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1)
+  background-color: #EEE
+  padding: 1em
+  margin: 0 -1em
+
+.show
+  label
+    :font-weight bold
+    :font-size 12pt
+  .field
+    :margin-bottom 1.5em
+    :min-height 3em
+.counter
+  :display block
+  //:font-weight bold
+  :font-size small
+.counter_warning
+  :color #600
+.counter_exceeded
+  :color #E00
+.project-doc
+  :margin-top 0.5em
+  .field_with_errors
+    :display inline
+.form-checkbox
+  :display inline
+  .field_with_errors
+    :display inline

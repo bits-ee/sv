@@ -1,0 +1,44 @@
+- @users = User.where(:user_type => User.type_priority).order(:name).all
+%table#users.data-table
+  %thead
+    %tr
+      %th
+      - if current_user.is_admin?
+        %th
+      - else
+        %th.hidden
+      %th.controlable.sort.alpha= User.human_attribute_name(:name)
+      %th.controlable.sort.rating= User.human_attribute_name(:is_admin)
+      %th.controlable.sort.alpha= User.human_attribute_name(:status)
+      %th.controlable.sort.alpha= User.human_attribute_name(:role)
+      %th.controlable.sort.alpha= User.human_attribute_name(:group)
+      %th.controlable.sort.num.nowrap= User.human_attribute_name(:group_order_number)
+      %th.controlable.sort.alpha= User.human_attribute_name(:last_login_date)
+  %tbody
+    - @users.each_with_index do |user, index|
+      %tr
+        %td{style: 'text-align: right'}=index+1
+        - if current_user.is_admin?
+          %td
+            = link_to edit_user_path(user.id) do
+              = image_tag 'icons/pencil.png', :title => t('common.edit')
+        -else
+          %td.hidden
+        %td= link_to user.fullname, user_path(user.id)
+        %td= user.is_admin? ? t('common.yes_') : nil
+        %td{ class: user_status_color(user.status)}= t("user.status.#{user.status.downcase}")
+        %td= user.role
+        %td= t('user.user_groups').values[user.group]
+        %td{style: 'text-align: right'}= user.group_order_number
+        %td
+          - if user.last_login_date.present?
+            = "#{time_ago_in_words(user.last_login_date)} #{t('common.ago')}"
+            %span.sort.hidden= user.last_login_date
+
+= link_to new_user_path, :class => 'with-image' do
+  = image_tag 'icons/user--plus.png', :size => '16x16', :title => t('user.add_priority_user')
+  %span>= t('user.add_priority_user')
+:javascript
+  $(function(){
+    $('#users').tablesorter({sortList: [[2, 0]]});
+  });

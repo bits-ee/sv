@@ -1,0 +1,5 @@
+- inviter = User.find(@user.created_by)
+= "#{link_to inviter.fullname, user_url(inviter.id)} #{t('mail.invites', :locale => @user.locale)} #{link_to t('support.shortname', :locale => @user.locale), root_url}.".html_safe
+%br
+.linktoclick{ style: 'margin: 3em 3em 0em 3em' }
+  = link_to t('mail.accept_invite', :locale => @user.locale), signup_url(:email => @user.email, :invite_token => @user.invite_token)

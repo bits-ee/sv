@@ -1,0 +1,19 @@
+%h2= t('user.add_priority_user')
+%br
+= form_for @user, :url => users_path, :html => {:method => :post} do |f|
+  .label<
+    =f.label :email
+    = '*' if @user.requires_email
+  .field
+    =f.email_field :email
+  =f.hidden_field :user_type
+  .label
+    =f.label :is_admin
+  .field
+    =f.check_box :is_admin
+  %br
+  %br
+  =f.submit t('user.add')
+  =# t('common.or')
+  =#link_to t('common.cancel'), :back
+

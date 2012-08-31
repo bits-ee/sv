@@ -1,0 +1,72 @@
+!!! 5
+%html
+  %head{ lang: I18n.locale, dir: 'ltr' }
+    %title= get_title
+    %base{ href: root_url }
+    %meta{ charset: 'utf-8' }
+    %meta{ 'name' => 'viewport', :content => 'width=device-width, initial-scale=1.0' }
+    %meta{ 'name' => 'google-site-verification', :content =>'d-4tbQ1SANxUlUc0yJYDLJnxG2lshr2ypRgpPUZm7pE' }
+    %meta{ 'name' => 'description', :content => t('common.description') }
+    %meta{ 'name' => 'keywords', :content => t('common.keywords') }
+    = favicon_link_tag 'favicon.png', type: 'image/png'
+    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag 'mobile', media: 'only screen and (max-device-width:480px)'
+    -#= stylesheet_link_tag 'reset', 'typography', 'colors', 'common', 'style', 'tipsy', 'temp'
+    -#= stylesheet_link_tag '/ui/base/jquery.ui.base.min.css', '/ui/base/jquery.ui.theme.min.css', '/ui/base/jquery.ui.datepicker.min.css'#, :cache => 'jquery_ui' #'/ui/base/jquery.ui.all.css'
+    = javascript_include_tag 'application'
+    = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?sensor=false&language=ru'
+    -#= javascript_include_tag 'jquery.google-analytics'
+    -#= javascript_include_tag 'jquery-1.6.3.min', 'localization', 'jquery.autocomplete', 'jquery.livequery', 'jquery.tipsy', 'jquery.addplaceholder.min', 'jquery.tablesorter.min', 'common', 'application'#, :cache => 'javascripts'
+    -#= javascript_include_tag 'ui/jquery.ui.core.min', 'ui/jquery.ui.datepicker.min'#, :cache => 'jquery_ui'
+    = csrf_meta_tag
+    -#= stylesheet_link_tag 'http://twitter.github.com/bootstrap/assets/css/bootstrap-1.1.1.min.css'
+    /[if lt IE 9]
+      %script{ :src => 'https://html5shiv.googlecode.com/svn/trunk/html5.js' }
+  %body
+    - if Rails.env.production?
+      :javascript
+        $(function(){ $.trackPage('UA-25293717-1'); });
+
+    #layout
+      #overlay
+        #status-top
+          .messages
+            = flash_message
+      #content.container-fluid
+        = render :partial => 'layouts/status'
+        .row
+          .span3
+            = link_to image_tag('logo_sv.png', style: 'margin: 0 auto; margin-top: 20px; display: block'), root_url, rel: 'start'
+            - if action_name != 'main'
+              %nav.menu
+                .menu-head
+                  %span.absolute{ style: 'margin-left: -1.5em; color: #aaa' } &larr;
+                  = link_to t('common.homepage'), root_path, style: 'color: #666', rel: 'start'
+                  %span.mark ▼
+                .menu-list
+                  %ul.unstyled
+                    %li= link_to_unless_current t('common.menu_what'), what_path
+                    %li= link_to_unless_current t('common.menu_who'), who_path
+                    %li= link_to_unless_current t('common.menu_where'), where_path
+                    %li= link_to_unless_current t('common.menu_how'), how_path
+                = content_for :side_menu
+          %header.span12
+            %h1{ style: 'color: #ff6600; font: 42pt/64pt georgia; margin-bottom: 0;' }= t('support.shortname')
+            %div.nowrap{ style: 'font: 17pt/22pt arial; color: #333;'}
+              = t('common.synopsis_line1')
+              %br>
+              = t('common.synopsis_line2')
+            #cta
+              
+              %span{ style: 'color: #fff; font: 17pt/20pt arial' }<>
+                = @notification
+                
+              .absolute{ style: 'right: 1em; top: 0.8em' }
+                - if current_user
+                  = link_to t('dashboard.title'), dashboard_path, :class => 'button button-cta' if current_user.is_admin or current_user.is_priority?
+                - else
+                  = link_to t('common.apply_now'), signup_path, :class => 'button button-cta' if @distance >= 0
+        .row{ style: 'margin-top: 1em'}
+          .span12.offset3= yield
+    - if Rails.env.production?
+      =render :partial => 'pages/yandex_metrika'

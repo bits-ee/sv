@@ -1,0 +1,6 @@
+.relative{:style => 'padding: 1.5em 1em; text-align: center; box-shadow: 1px 1px 3px 1px #CCC; -moz-box-shadow: 1px 1px 3px 1px #CCC;'}
+  %p.strong= signup_form ? t('user.third_party_signup') : t('user.third_party_login')
+  %ul.unstyled
+    - THIRD_PARTY_AUTH.each do |provider|
+      %li{:style => 'margin-right: 1em; margin-top: 1em;'}
+        =link_to(image_tag("/assets/oauth2-providers/#{provider}.png"), auth_path(:provider => provider), :alt => t('user.third_party_login_providers.' + provider), :class => "button-#{provider}")

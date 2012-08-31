@@ -1,0 +1,50 @@
+#userinfo.row
+  .span9.offset3
+    #links
+      - if current_user_id
+        %ul.unstyled.nowrap{ style: 'margin: 0' }
+          %li
+            = link_to user_path(current_user_id), class: 'with-image' do
+              = image_tag (current_user.authentication ? "icons/#{current_user.authentication.provider}.png" : 'icons/user-business.png'), size: '16x16'
+              %span>= current_user.fullname.strip
+          - if current_user.is_priority?
+            %li
+              = link_to users_path, class: 'with-image' do
+                = image_tag 'icons/users.png', title: t('user.users'), size: '16x16'
+                %span>= t('user.users')
+            %li
+              = link_to projects_path, class: 'with-image' do
+                = image_tag 'icons/briefcase--pencil.png', title: t('project.projects'), size: '16x16'
+                %span>= t('project.projects')
+          - if current_user.is_regular?
+            %li
+              = link_to project_path(current_user.project_id), class: 'with-image' do
+                = image_tag 'icons/briefcase.png', size: '16x16'
+                %span>= current_user.project.name
+          %li
+            = link_to logout_path, class: 'with-image' do
+              = image_tag 'icons/door-open.png', title: t('user.logout'), size: '16x16'
+              %span>= t('user.logout')
+          %li
+            = render :partial => 'layouts/language_selector'
+      - else
+        %ul.unstyled.nowrap{ style: 'margin: 0' }
+          %li
+            = link_to login_users_path, class: 'with-image' do
+              = image_tag 'icons/key.png', title: t('user.login'), size: '16x16'
+              %span= t('user.login')
+          %li
+            = link_to signup_path, class: 'with-image' do
+              = image_tag 'icons/user-business.png', title: t('user.signup_form'), size: '16x16'
+              %span= t('user.signup_form')
+          %li
+            = render :partial => 'layouts/language_selector'
+  .span3
+    %nav#tail
+      %h4.em.nowrap{ style: 'line-height: 1' }= link_to t('content.season2011'), season2011_path, style: 'color: #f60'
+  :javascript
+    $(function(){
+      $('.languages').change(function(){
+        window.location = $(this).find('option:selected').data('action');
+      });
+    });

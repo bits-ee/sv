@@ -1,0 +1,217 @@
+//
+// NB! НЕ СТИРАТЬ КОММЕНТАРИИ
+//
+
+// font-weight: bold;
+// font-style: italic;
+// font-variant: small-caps;
+// font-size: 1em;
+// line-height: 1.5em;
+// font-family: verdana, sans-serif
+
+// font: bold italic small-caps 1em/1.5em verdana, sans-serif
+
+// 7 pt: minion
+// 8 pt: brevier, petit or small text
+.brevier, .petit, .small-text, .pt8
+  font: normal normal normal 8pt/#{$baseline} sans-serif
+
+// 9 pt: bourgeois or Galliard
+// 10 pt: long primer, corpus or Garamond (c.f. Garamond)
+.long-primer, .corpus, .pt10
+  font: normal normal normal 10pt/#{$baseline} sans-serif
+
+// 11 pt: small pica or philosophy
+.small-pica, .philosophy, .pt11
+  font: normal normal normal 11pt/#{$baseline} sans-serif
+
+// 12 pt: pica or cicero
+.pica, .cicero, .pt12
+  font: normal normal normal 12pt/#{$baseline} sans-serif
+
+// 14 pt: English, mittel or Augustin
+.mittel, .pt14
+  font: normal normal normal 14pt/#{$baseline} sans-serif
+  //:margin -2pt 0 2pt
+
+// 15 pt: Columbian (US), two-line brevier (Brit.)
+// 18 pt: great primer
+.great-primer, .pt18
+  // FIXME: 18/16 плохо
+  font: normal normal normal 18pt/#{$baseline*2} sans-serif
+  //:margin -2pt 0 2pt
+
+// 20 pt: paragon
+// 21 pt: double small pica
+// 22 pt: double small pica (US), double pica (Brit.)
+// 24 pt: double pica (US) two-line pica (Brit.)
+.double-pica, .pt24
+  font: normal normal normal 24pt/#{$baseline*2} sans-serif
+  //:margin 4pt 0 -4pt
+
+// 28 pt: double English (US), two-line English (Brit.)
+// 30 pt five-line nonpareil (US)
+// 32 pt: four-line brevier (US)
+// 36 pt: double great primer (US), two-line great primer (Brit.)
+// 44 pt: Meridian (US), two-line double pica (Brit.), or Trafalgar
+// 48 pt: canon or four-line
+.canon, .four-line
+  font: normal normal normal 48pt/#{$baseline*4} sans-serif
+  //TODO: calculate offset margin, padding
+
+// 60 pt: five-line pica
+// 72 pt: inch
+
+body, p, ul, li, blockquote, pre, td, th, label
+  @include sans-serif-font
+  //text-rendering: optimizeLegibility
+
+p
+  //margin-bottom: $baseline / 2
+  & + p
+    text-indent: 1.5em
+    margin-top: 0
+  //small
+  //  font-size: $basefont - 2
+  //  color: $grayLight
+
+h1, h2, h3, h4, h5, h6
+  font-weight: bold
+  color: $grayDark
+  small
+    color: $grayLight
+
+h1
+  margin-bottom: $baseline
+  font-size: 30pt
+  line-height: $baseline * 2
+  //small
+  //  font-size: 18px
+
+h2
+  font-size: 24pt
+  line-height: $baseline * 2
+  //small
+  //  font-size: 14px
+
+h3
+  font-size: 21pt
+  line-height: $baseline * 2
+  //small
+  //  font-size: 14px
+
+h4
+  font-size: 18pt
+  line-height: $baseline * 2
+  //small
+  //  font-size: 12px
+
+h5
+  font-size: 14pt
+  line-height: $baseline
+
+h6
+  font-size: 12pt
+  line-height: $baseline
+  //color: $grayLight
+  //text-transform: uppercase
+
+ul, ol
+  margin: 0 0 $baseline 25px
+
+ul ul, ul ol, ol ol, ol ul
+  margin-bottom: 0
+
+ul
+  list-style: disc
+
+ol
+  list-style: decimal
+
+li
+  line-height: $baseline
+  color: $gray
+
+ul.unstyled, ul.plain
+  list-style: none
+  margin-left: 0
+
+dl
+  margin-bottom: $baseline
+  dt, dd
+    line-height: $baseline
+  dt
+    font-weight: bold
+  dd
+    margin-left: $baseline/2
+
+hr
+  margin: 20px 0 19px
+  border: 0
+  border-bottom: 1px solid #eee
+
+b, strong, .strong
+  font-style: inherit
+  font-weight: bold
+
+em, .em
+  font-style: italic
+  font-weight: inherit
+  //line-height: inherit
+
+.muted
+  color: $grayLight
+
+abbr, acronym
+  letter-spacing: 1pt
+
+blockquote
+  margin-bottom: $baseline
+  border-left: 5px solid #eee
+  padding-left: 15px
+  p
+    @include shorthand-font(300,$basefont,$baseline)
+    margin-bottom: 0
+
+  //small
+  //  display: block
+  //  @include shorthand-font(300,12px,$baseline)
+  //  color: $grayLight
+  //  &:before
+  //    content: '\2014 \00A0'
+
+address
+  display: block
+  line-height: $baseline
+  margin-bottom: $baseline
+
+code, pre
+  padding: 0 3px 2px
+  font-family: Monaco, Andale Mono, Courier New, monospace
+  //font-size: 12px
+  @include border-radius(3px)
+
+code
+  background-color: lighten($orange, 40%)
+  color: rgba(0,0,0,.75)
+  padding: 1px 3px
+
+pre
+  background-color: #f5f5f5
+  display: block
+  padding: ($baseline - 1) / 2
+  margin: 0 0 $baseline
+  line-height: $baseline
+  //font-size: 12px
+  border: 1px solid #ccc
+  border: 1px solid rgba(0,0,0,.15)
+  @include border-radius(3px)
+  white-space: pre
+  white-space: pre-wrap
+  word-wrap: break-word
+
+.text-block, .measure
+  max-width: 30em
+
+.text-block-long, .measure-long
+  max-width: 40em

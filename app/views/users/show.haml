@@ -1,0 +1,63 @@
+-title @user.full_name
+.widget
+  %section
+    %div.show
+      %h2.inline>= @user.full_name
+      -if can_edit_user? @user.id
+        =link_to t('common.edit'), edit_user_path(@user.id), :class => 'button', :style => 'margin-left: 1em;'
+      .person-description.span6{ style: 'margin-top: 2em'}
+        .float-left{ style: 'width: 100px; margin-right: 10px' }
+          = image_tag @user.avatar.url(:thumb)
+          = social_icons(@user)
+          = link_to(image_tag('icons/skype.png', :title => t('common.skype.chat')), "skype://#{@user.skype}?chat") if @user.skype and @user.skype.strip.present?
+        .float-left{ style: 'width: 250px' }
+          .label.inline<
+            =label @user, :user_type, User.human_attribute_name(:user_type)
+            =':&nbsp;'.html_safe
+          %span>=t("user.user_type.#{@user.user_type.downcase}")
+          %br
+          .label.inline<
+            =label @user, :status, User.human_attribute_name(:status)
+            =':&nbsp;'.html_safe
+          %span>=t("user.status.#{@user.status.downcase}")
+          %br>
+          - if @user.is_priority?
+            .label.inline<
+              =label @user, :is_admin, User.human_attribute_name(:is_admin)
+              =':&nbsp;'.html_safe
+            %span>= check_box_tag :user, :is_admin, @user.is_admin, :disabled => 'disabled'
+            %br
+            -if @user.is_admin
+              .label.inline<
+                =label @user, :receive_notifications, User.human_attribute_name(:receive_notifications), :title => t('user.descriptions.receive_notifications')
+                =':&nbsp;'.html_safe
+              %span>= check_box_tag :user, :receive_notifications, @user.receive_notifications, {:disabled => 'disabled', :title => t('user.descriptions.receive_notifications')}
+              %br
+          .label.inline<
+            =label @user, :role, User.human_attribute_name(:role), :title => t('user.descriptions.role')
+            =':&nbsp;'.html_safe
+          %em>= @user.role
+          -if current_user.is_admin?
+            %br
+            .label.inline<
+              =label @user, :group_order_number, User.human_attribute_name(:group_order_number), :title => t('user.descriptions.group_order_number')
+              =':&nbsp;'.html_safe
+            %em>= @user.group_order_number
+          %br
+          =mail_to @user.email
+      .clear
+      %br
+      =label @user, :about, User.human_attribute_name(:about)
+      .field= @user.about
+      -if @user.last_login_date.present?
+        .label.inline<
+          =label @user, :last_login_date, User.human_attribute_name(:last_login_date)
+          =':&nbsp;'.html_safe
+        %span>=l(@user.last_login_date, :format => :long)
+        %br
+      - if @user.created_at.present? and @user.created_by.present?
+        .label.inline<
+          =label @user, :created_at, t('user.added_by', :whom => User.find(@user.created_by).full_name)
+          =':&nbsp;'.html_safe
+        %span>=l(@user.created_at, :format => :long)
+%br

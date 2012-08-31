@@ -1,0 +1,14 @@
+="#{t('mail.notify.admin_changed_status')} #{link_to @project.name, project_url(@project.id)}.".html_safe
+%br
+%br
+= Project.human_attribute_name(:status)
+%span{:style => 'font-weight: bold;'}="#{t('project.status.' + @project.status.downcase)}"
+=" - #{t('project.status_description.' + @project.status.downcase)}"
+-if @reason.present?
+  %br
+  ="#{t('project.reason')}:"
+  %span{:style => 'font-weight: bold;'}=@reason
+%br
+=t('mail.contribute_more')
+.linktoclick{:style => 'margin: 2em 0em;'}
+  = link_to t('mail.goto_project'), edit_project_url(@project.id)

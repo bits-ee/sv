@@ -1,0 +1,60 @@
+%h2= t("user.signup_form")
+%br
+.row
+  .span6
+    = form_for @user, :url => users_path, :html => {:method => :post, :style => 'margin-left: 0em; margin-top: 0.5em'} do |f|
+      .label
+        =label_tag 'project_name', Project.human_attribute_name(:name)
+      -if @project and @project.persisted?
+        =@project.name
+      -else
+        .field
+          =text_field :project, :name
+      %br
+      -if @auth and @auth.image_url
+        %br
+        =image_tag @auth.image_url
+        %br
+      .label
+        =f.label :name
+      -if @auth
+        .field.relative
+          %div{:style => 'position: absolute; left: -1.5em; top: 0.5em;'}
+            = image_tag "icons/#{@auth.provider}.png", :size => '16x16'
+          =f.text_field :name
+      -else
+        .field
+          =f.text_field :name
+      .label
+        =f.label :email
+      -if @user and @user.persisted?
+        =@user.email
+        =f.hidden_field :email
+        =f.hidden_field :invite_token
+      -else
+        .field
+          =f.email_field :email
+      -unless @auth
+        .label
+          =f.label :password
+        .field
+          =f.password_field :password
+        .label
+          =f.label :password_confirmation
+        .field
+          =f.password_field :password_confirmation
+      %br>
+      %br
+      =f.submit t('common.signup')
+      -if @auth
+        =t('common.or')
+        =link_to t('common.cancel').mb_chars.downcase, logout_path(:provider => session['auth_provider'], :uid => session['auth_uid'])
+  -unless third_party_authorized
+    .span5{:style => 'padding-top: 8em;'}
+      =render :partial => 'layouts/third_party_login', :locals => {:signup_form => true}
+    .span1
+%br>
+%br
+= link_to t('common.disclaimer'), disclaimer_path, rel: 'license'
+%br>
+%br

@@ -1,0 +1,25 @@
+%h2= t("user.signup_form")
+%br
+= form_for @user, :url => users_path, :html => {:method => :post} do |f|
+  .label
+    =f.label :name
+  .field
+    =f.text_field :name
+  .label
+    =f.label :email
+  = @user.email
+  =f.hidden_field :email
+  =f.hidden_field :invite_token
+  .label
+    =f.label :password
+  .field
+    =f.password_field :password
+  .label
+    =f.label :password_confirmation
+  .field
+    =f.password_field :password_confirmation
+  %br
+  %br
+  =f.submit t('common.signup')
+  =# t('common.or')
+  =#link_to t('common.cancel'), :back

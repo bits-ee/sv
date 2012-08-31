@@ -1,0 +1,276 @@
+html
+  :height 100%
+  :font-size 62.5%
+
+body
+  :height 100%
+  
+a
+  :outline 0
+  &, &[href='']:visited, &.fresh:visited
+    :color #16c
+  &:visited
+    :color #a09
+  &, &:visited, &[href='']:visited, &.fresh:visited
+    &:hover
+      :color #f30
+  &:active
+    :color #c00
+    :position relative
+    :top 0.1em
+  &.delete, &.cancel
+    :color #d00 !important
+  &.shallow
+    :text-decoration none
+    :border-bottom 0.1em dotted
+  &.nodecor, &.no-decor
+    :text-decoration none
+  //&.main-link
+  //  :font-size 1.3em
+  //  :line-height 1.2em
+  &.with-image
+    :text-decoration none
+    > img
+      :vertical-align text-bottom
+    > span
+      :color inherit
+      :text-decoration underline
+  &.with-image.shallow
+    :border-bottom 0
+    > span
+      :text-decoration none
+      :border-bottom 0.1em dotted
+
+table
+  tr
+    td
+      :vertical-align top
+
+.float-right, .floatright
+  :float right
+
+.float-left, .floatleft
+  :float left
+  
+.clear-both, .clearboth, .clear
+  :clear both
+  
+.clear-right, .clearright
+  :clear right
+  
+.clear-left, .clearleft
+  :clear left
+  
+.absolute
+  :position absolute !important
+  
+.relative
+  :position relative !important
+  
+.inline
+  :display inline !important
+  
+.block
+  :display block !important
+  
+.inline-block
+  :display inline-block !important
+  
+.hide, .hidden
+  :display none !important
+  
+.invisible
+  :visibility hidden !important
+  
+.visible
+  :visibility visible !important
+
+.center
+  :text-align center
+  
+.nowrap, .no-wrap
+  :white-space nowrap
+  
+.noselect, .no-select
+  :-moz-user-select none
+  :-webkit-user-select none
+  
+.space-span
+  span:not(:empty) ~ span:not(:empty)
+    :padding-left 1em !important
+  
+.highlight
+  :font-weight bold
+  
+.underline 
+  :text-decoration underline
+  
+.not-underline
+  :text-decoration none
+
+.strike
+  :text-decoration line-through
+  
+.hang-left
+  :position absolute
+  :float left  
+  :width 3em  
+  :margin-left -3.7em
+  //:white-space nowrap
+  :text-align right
+  
+.hang-right  
+  :float right
+  :width 5em
+  :margin-right -6em
+  :text-align left
+  
+.rnd
+  :border-radius 0.6em
+  :-moz-border-radius 0.6em
+  :-webkit-border-radius 0.6em
+  
+.rnd-tl, .rnd-top-left
+  :border-top-left-radius 0.6em
+  :-moz-border-radius-topleft 0.6em
+  :-webkit-border-top-left-radius 0.6em
+  
+.rnd-tr, .rnd-top-right
+  :border-top-right-radius 0.6em
+  :-moz-border-radius-topright 0.6em
+  :-webkit-border-top-right-radius 0.6em
+  
+.rnd-bl, .rnd-bottom-left
+  :border-bottom-left-radius 0.6em
+  :-moz-border-radius-bottomleft 0.6em
+  :-webkit-border-bottom-left-radius 0.6em
+  
+.rnd-br, .rnd-bottom-right
+  :border-bottom-right-radius 0.6em
+  :-moz-border-radius-bottomright 0.6em
+  :-webkit-border-bottom-right-radius 0.6em
+
+.table
+  :display table
+
+.table-row
+  :display table-row
+
+.table-cell
+  :display table-cell
+  :vertical-align top
+
+img
+  :vertical-align text-bottom
+  
+ul ul
+  :margin-left 1.5em
+  > li
+    :list-style circle
+    //:list-style none
+    
+.lift
+  :background #ffc
+  :margin-bottom -1px
+  :border-bottom 1px solid #999
+  :box-shadow 0 2px 1px #eee
+  :box-shadow 0 2px 1px rgba(0, 0, 0, 0.3)
+  :-moz-box-shadow 0 2px 1px rgba(0, 0, 0, 0.3)
+  :-webkit-box-shadow 0 2px 1px rgba(0, 0, 0, 0.3)
+  :position relative
+  :z-index 0 !important
+  
+.lift-2
+  :border 1px solid #999
+  :border-left 1px solid #ccc
+  :border-top 0
+  :box-shadow 2px 2px 1px #ccc
+  :box-shadow 2px 2px 1px rgba(0, 0, 0, 0.3)
+  :-moz-box-shadow 2px 2px 1px rgba(0, 0, 0, 0.3)
+  :-webkit-box-shadow 2px 2px 1px rgba(0, 0, 0, 0.3)
+  :padding 0.5em
+  :margin-left 0.5em
+  //:margin-top 0
+  :position absolute 
+  :z-index 1 !important
+  :background-color #fff
+  :background -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee))
+  :background -moz-linear-gradient(top,  #fff,  #eee)
+  
+ol
+  :padding-left 3em
+  > li
+    :list-style decimal
+
+.field_with_errors
+  input
+    :outline 1px solid red
+  label
+    :color #d00
+
+#overlay
+  :position fixed
+  :z-index 1  
+  #status-top
+    :text-align center
+    :position inherit
+    :top 0
+    :width 100%
+    :height 0
+    .messages      
+      :overflow hidden
+      :font-size 11pt
+      :display inline-block
+      :margin 0 auto
+      & > div:last-child
+        :border-bottom-right-radius 0.6em
+        :border-bottom-left-radius 0.6em
+        :-moz-border-radius-bottomright 0.6em
+        :-moz-border-radius-bottomleft 0.6em
+        :-webkit-border-bottom-left-radius 0.6em
+        :-webkit-border-bottom-right-radius 0.6em
+      .error, .warning, .notice
+        :padding 0.2em 3em
+        :text-align left
+        :max-width 35em
+      .error
+        :color #fff
+        :background-color #d00
+        :background-color rgba(211, 0, 0, 0.8)
+        &:before
+          :position absolute
+          :content url('icons/exclamation-red.png')
+          :margin-top 2pt
+          :margin-left -1.5em
+      .warning
+        :color #fff
+        :background-color #db0
+        :background-color rgba(221, 187, 0, 0.8)
+        &:before
+          :position absolute
+          :content url('icons/exclamation.png')
+          :margin-top 2pt
+          :margin-left -1.5em
+      .notice
+        :color #fff
+        :background-color #0a0
+        :background-color rgba(0, 170, 0, 0.8)
+        &:before
+          :position absolute
+          :content url('icons/tick-circle.png')
+          :margin-top 2pt
+          :margin-left -1.5em
+          
+  #status-bottom
+  
+// Системные вспомогательные селекторы
+.translation_missing, .translation-missing, .tm
+  //:white-space nowrap
+  :text-decoration inherit
+  :background-color #ffc
+  :color #666  
+
+.todo
+  :display inline
+  :background-color rgba(255,150,150,0.9)
+  :color #333

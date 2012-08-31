@@ -1,0 +1,13 @@
+%article.span3.project-summary
+  %div{ style: 'height: 90px; overflow: hidden' }
+    -if project.persisted?
+      = link_to image_tag(project.avatar.url(:medium), style: "max-width: 100%; max-height: 100%;"), project_path(project.id)
+    - else
+      = image_tag(project.avatar.url(:medium), style: "max-width: 100%; max-height: 100%;")
+  %header.strong{ style: 'color: #333; margin-top: 0.3em;'}
+    -if project.persisted?
+      %h6= link_to project.name.truncate(40), project_path(project.id)
+    -else
+      = project.name.truncate(40)
+  %span= project.synopsys
+  %br

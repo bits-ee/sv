@@ -1,0 +1,48 @@
+- @users = User.where(:user_type => User.type_regular).includes(:project => :contest).order(:name).all
+%table#users.data-table
+  %thead
+    %tr
+      %th
+      - if current_user.is_admin?
+        %th
+      -else
+        %th.hidden
+      %th.controlable.sort.alpha= User.human_attribute_name(:name)
+      %th.controlable.sort.alpha= Project.human_attribute_name(:name)
+      %th.controlable.sort.alpha= Contest.model_name.human
+      %th
+        = User.human_attribute_name(:skype)
+        %br>
+        = User.human_attribute_name(:email)
+      %th.controlable.sort.alpha= User.human_attribute_name(:last_login_date)
+  %tbody
+    - @users.each_with_index do |user, index|
+      %tr
+        %td{style: 'text-align: right'}=index+1
+        - if current_user.is_admin?
+          %td
+            = link_to edit_user_path(user.id) do
+              = image_tag 'icons/pencil.png', :title => t('common.edit')
+        -else
+          %td.hidden
+        %td
+          = link_to user.fullname, user_path(user.id)
+          %br>
+          %span{:class => user_status_color(user.status)}= t("user.status.#{user.status.downcase}")  
+        %td
+          = link_to user.project.name, project_path(user.project_id)
+          %br>
+          %span{:class => project_status_color(user.project.status)}= t("project.status.#{user.project.status.downcase}")  
+        %td= user.project.contest.name
+        %td
+          = link_to image_tag('icons/skype.png', size: '16x16', style: 'vertical-align: middle'), "skype://#{user.skype}?chat" if user.skype.present?
+          %br>
+          = mail_to user.email
+        %td
+          - if user.last_login_date.present?
+            = "#{time_ago_in_words(user.last_login_date)} #{t('common.ago')}"
+            %span.sort.hidden= user.last_login_date
+:javascript
+  $(function(){ 
+    $('#users').tablesorter({sortList: [[2, 0]]});
+  });

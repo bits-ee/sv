@@ -1,0 +1,20 @@
+-title t('user.users')
+%h2= t('user.users')
+%br
+%div
+  %ul.tabs
+    -if params[:user_type].nil? or params[:user_type] == User.type_priority.downcase
+      %li.active>= t('user.user_type.priority')
+    -else
+      %li>= link_to t('user.user_type.priority'), users_path
+    -if params[:user_type] == User.type_regular.downcase
+      %li.active>= t('user.user_type.regular')
+    -else
+      %li>= link_to t('user.user_type.regular'), users_path(:user_type => User.type_regular.downcase)
+    -if params[:user_type] == User.type_lector.downcase
+      %li.active>= t('user.user_type.lector')
+    -else
+      %li>= link_to t('user.user_type.lector'), users_path(:user_type => User.type_lector.downcase)
+  -ut = params[:user_type].nil? ? User.type_priority.downcase : params[:user_type]
+  =render :partial => "index_#{ut}" if User.user_types.include? ut.upcase
+%br

@@ -1,0 +1,36 @@
+%h2= t('user.add_lector')
+%br
+= form_for @user, :url => users_path, :html => {:method => :post} do |f|
+  .label<
+    =f.label :name
+    ='*' if @user.requires_name
+  .field
+    =f.text_field :name
+  .label<
+    =f.label :email
+    ='*' if @user.requires_email
+  .field
+    =f.email_field :email
+  =f.hidden_field :user_type
+  .label
+    =f.label :skype
+  .field
+    =f.text_field :skype
+  .label
+    =f.label :role
+  .field
+    .description.brevier=t('user.descriptions.role')
+    =f.text_field :role
+  .label
+    =f.label :about
+  .field
+    =f.text_area :about, :size => "80x5"
+  .label
+    =f.label :feedback
+  .field
+    =f.text_area :feedback, :size => "80x5"
+  %br
+  %br
+  =f.submit t('user.add_lector')
+  =# t('common.or')
+  =#link_to t('common.cancel'), :back

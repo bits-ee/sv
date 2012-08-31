@@ -1,0 +1,8 @@
+%h2.strong= t('common.menu_who')
+%br
+=render(:partial => "who_faces", :locals => {:users => @orgs, :type_title => t("user.user_groups.orgs"), :type_description => t("user.descriptions.orgs")}) unless @orgs.blank?
+=render(:partial => "who_faces", :locals => {:users => @admins, :type_title => t("user.user_groups.admins"), :type_description => t("user.descriptions.admins")}) unless @admins.blank?
+=render(:partial => "who_faces", :locals => {:users => @lectors, :type_title => t("user.user_groups.lectors"), :type_description => t("user.descriptions.lectors")}) unless @lectors.blank?
+=render(:partial => "who_faces", :locals => {:users => @mentors, :type_title => t("user.user_groups.mentors"), :type_description => t("user.descriptions.mentors")}) unless @mentors.blank?
+=render(:partial => "who_faces", :locals => {:users => @guests, :type_title => t("user.user_groups.guests"), :type_description => t("user.descriptions.guests")}) unless @guests.blank?
+=render(:partial => "who_faces", :locals => {:users => @alumnis, :type_title => t("user.user_groups.alumnis"), :type_description => t("user.descriptions.alumnis")}) unless @alumnis.blank?

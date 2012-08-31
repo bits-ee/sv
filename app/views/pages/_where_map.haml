@@ -1,0 +1,93 @@
+-# markers = []
+-# markers << '36.70517,-4.45985' #Выставочный центр в Малаге – Х км, http://www.fycma.com/
+-# markers << '37.40639,-6.00672' #Технопарк «Extenda» в Севилье — Х км, http://www.extenda.es   
+-# markers << '36.73641,-4.55169' #Технопарк «IDEA!» в Малаге, http://www.pta.es
+-# markers << '36.67486,-4.49298' #Аэропорт имени Пабло Пикассо в Малаге, http://www.malagaairport.eu/   
+-# markers << '36.01271,-5.60295' #Тарифа – столица ветров, самая южная точка Европы, http://www.aytotarifa.com/  
+-# markers << '36.05913,-5.66590' #Hotel Punta Sur
+-# markers_string = markers.collect{ |marker| "&markers=color:0xff6600|#{marker}" }.join  
+:javascript
+  var map;
+  var markers = [];
+  $(function(){
+    $('.mapnav').delegate('li','mouseenter mouseleave click',function(e){ 
+      var index = $(this).index();
+      if (e.type == 'mouseenter') {
+        markers[index].setAnimation(google.maps.Animation.BOUNCE);
+      }else if(e.type == 'mouseleave'){
+        markers[index].setAnimation(null);
+      }else{
+        map.panTo(markers[index].position);
+      }
+    });  
+  });
+  
+  function initialize() {
+    var myOptions = {
+      zoom: 8,
+      center: new google.maps.LatLng(36.741962,-5.4),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      panControl: false,
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+      },
+      zoomControl: true,
+      zoomControlOptions: {
+        style: google.maps.ZoomControlStyle.SMALL
+      },
+    };
+    map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
+    
+    //Hotel Punta Sur
+    markers[0] = new google.maps.Marker({
+      position: new google.maps.LatLng(36.05913,-5.66590), map: map
+    });    
+    //Тарифа
+    markers[1] = new google.maps.Marker({
+      position: new google.maps.LatLng(36.01271,-5.60295), map: map
+    });
+    //Аэропорт
+    markers[2] = new google.maps.Marker({
+      position: new google.maps.LatLng(36.67486,-4.49298), map: map
+    });
+    //Выставочный центр
+    markers[3] = new google.maps.Marker({
+      position: new google.maps.LatLng(36.70517,-4.45985), map: map
+    });
+    //IDEA!
+    markers[4] = new google.maps.Marker({
+      position: new google.maps.LatLng(36.73641,-4.55169), map: map
+    });
+    //Cartuja
+    markers[5] = new google.maps.Marker({
+      position: new google.maps.LatLng(37.407443,-6.004235), map: map
+    });
+    //TecnoBahia 
+    markers[6] = new google.maps.Marker({
+      position: new google.maps.LatLng(36.648727,-6.262207), map: map
+    });
+    //Ronda
+    markers[7] = new google.maps.Marker({
+      position: new google.maps.LatLng(36.741962,-5.166412), map: map
+    });
+    //Jerez
+    markers[8] = new google.maps.Marker({
+      position: new google.maps.LatLng(36.686562,-6.137173), map: map
+    });
+    //Marbella
+    markers[9] = new google.maps.Marker({
+      position: new google.maps.LatLng(36.521776,-4.881362), map: map
+    });
+    //Algeciras
+    markers[10] = new google.maps.Marker({
+      position: new google.maps.LatLng(36.07645, -5.556975), map: map
+    });
+    //Tanger
+    markers[11] = new google.maps.Marker({
+      position: new google.maps.LatLng(35.784955,-5.800781), map: map
+    });
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+  

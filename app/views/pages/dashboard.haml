@@ -1,0 +1,33 @@
+-title t('dashboard.title')
+%h2= t('dashboard.title')
+%br
+- Project.select('count(id) as c, status').group('status').all.each do |project| 
+  %span{ style: 'margin-right: 2em' }
+    %strong.great-primer= project.c
+    = t("project.status.#{project.status.downcase}")
+%hr
+.row
+  .span6
+    %h5= t('dashboard.highlighted')
+    %br
+    %ul.unstyled
+      - Project.where(status: ['ADDED', 'RESUBMITTED']).all.each do |project| 
+        %li
+          = t("project.status.#{project.status.downcase}")
+          \/
+          = link_to project.name, project_path(project)
+  .span6
+    - n = 20
+    %h5= t('dashboard.last_comments', :count => n)
+    %br
+    - Comment.order('created_at desc').includes(:project).limit(20).all.each do |comment| 
+      -# от других админов, работников Приоритета и выпускников сезона-2011. 
+      .comment.measure{ id: dom_id(comment), style: 'margin-bottom: 1em;' }
+        .header{ style: 'color: #f60' }
+          -#%strong= comment.title #subject?
+          = link_to comment.project.name, project_path(comment.project), style: 'font-weight: bold; color: inherit;' rescue nil
+          \/
+          %span= comment.user.name rescue nil
+          \/
+          %small{ style: 'opacity: 0.5' }= l(comment.created_at, format: :short)
+        .body= comment.body

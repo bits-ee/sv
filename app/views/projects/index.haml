@@ -1,0 +1,53 @@
+-title @contest.name
+%h2="#{t('project.projects')} #{@contest.name}"
+%br
+%table#projects.data-table
+  %thead
+    %tr
+      %th
+      - if user_logged_in? and current_user.is_admin?
+        %th
+      -else
+        %th.hidden
+      %th.controlable.sort.alpha= Project.human_attribute_name(:name)
+      %th.controlable.sort %
+      %th.controlable.sort.alpha= Project.human_attribute_name(:status)
+      %th.controlable.sort.alpha= User.human_attribute_name(:name)
+      %th.controlable.sort.alpha= Project.human_attribute_name(:url)
+      %th.controlable.sort.alpha= Project.human_attribute_name(:city)
+      %th.controlable.sort.alpha= Project.human_attribute_name(:created_at)
+  %tbody
+    -@projects.each_with_index do |project, index| 
+      %tr
+        %td{style: 'text-align: right;'}=index+1
+        - if user_logged_in? and current_user.is_admin?
+          %td
+            = link_to edit_project_path(project.id) do
+              = image_tag 'icons/pencil.png', :title => t('common.edit')
+        - else
+          %td.hidden
+        %td
+          =link_to project.name, project_path(project.id)
+        %td
+          - p_total, p_completed, p_bonus = project.completeness
+          - u_total, u_completed, u_bonus = project.user.completeness
+          - percent_completed = ((p_completed.to_f+u_completed.to_f)/(p_total.to_f+u_total.to_f)*100).to_i
+          - percent_class = percent_completed < 20 ? 'red' : (percent_completed > 80 ? 'green' : '')
+          %span{ class: percent_class }= "#{percent_completed}%"
+        %td{:title => t("project.status_description.#{project.status.downcase}"), :class => project_status_color(project.status)}= t("project.status.#{project.status.downcase}")
+        %td= link_to project.user.fullname, user_path(project.user.id)
+        %td= link_to project.url.sub(/^(http:\/\/)?(w{3}\.)?/,''), project.url unless project.url.nil?
+        %td= project.city
+        %td
+          - if project.created_at.present?
+            = l(project.created_at, :format => :short)
+            %span.sort.hidden= project.created_at
+%div
+  = link_to contest_path(@contest.id, :format => :xls), :class => 'with-image' do
+    = image_tag 'icons/document-excel.png', :size => '16x16'
+    %span>= t('contest.export_to_xls')
+%br
+:javascript
+  $(function(){
+    $('#projects').tablesorter({sortList: [[8, 1]]});
+  });

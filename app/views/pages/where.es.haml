@@ -1,0 +1,70 @@
+%h2.strong ¿Dónde?
+%br
+.row
+  .span12.pica{ style: 'color: #666;' } 
+    La sede de la aceleradora empresarial ‘Spanish Village’ se sitúa en Andalucía - la provincia más meridional de España, la meca del turismo europeo. Esta región goza de un clima extraordinario: 300 días de sol al año, la temperatura media anual de 18°C. La línea costera de Andalucía está bañada por el océano Atlántico y por el mar Mediterráneo, cuyas aguas son perfectas para bañarse, practicar kitesurf o windsurf. Andalucía es célebre por sus maravillosos paisajes de mar y montaña al mismo tiempo.
+%br
+.row
+  .span7
+    = image_tag 'hotelpuntasur.jpg', style: 'width: 100%', alt: 'Hotel Punta Sur'
+  .span5
+    %h4 Hotel ‘Punta Sur’
+    .nowrap{ style: 'color: #666;' } Coordenadas GPS: Lat 36 03.604 N, Lng 5 39.946 W
+    %br
+    %em{ style: 'color: #666;' }<
+      %ul{ style: 'list-style: circle; margin-left: 1.5em' }
+        %li hotel de tres estrellas a 100 metros de la playa;
+        %li alojamiento en habitaciones individuales que disponen de aire acondicionado;
+        %li amplia extensión con piscina y pista de tenis;
+        %li tres dietas al día (desayuno de buffet libre, almuerzo y cena compuesta de tres platos más refrescos);
+        %li wi-fi.
+  
+.row
+  .span12
+    %p 
+      Andalucía mantiene un desarrollo técnico intenso: la Comunidad Autónoma cuenta con 11 parques tecnológicos, 8 institutos técnicos y en el sector TIC trabajan más de 1500 empresas. Gigantes como IBM, Microsoft, Oracle, Ericsson, Fujitsu y otros tienen sus oficinas en la comunidad andaluza y es el líder de España en la cobertura e implantación de la telefonía móvil e Internet 3G. La región tiene una extensa red de carreteras y ferrocarriles de alta velocidad, además de efectuarse vuelos regulares a Rusia y capitales europeas.
+    %p 
+      %span Gracias a la política del gobierno de Andalucía que estimulan la colaboración con inversores y avanza en la realización de proyectos de TI, en la región se está desarrollando a pasos agigantados la comunidad de start-ups europea más antigua. Sus miembros están dispuestos a compartir su andadura en los numerosos eventos que tienen lugar durante todo el año aquí. Todo ello convierte a Andalucía en el lugar ideal para organizar la aceleradora empresarial y efectuar proyectos. Se pondrá a su disposición todo lo necesario para un trabajo productivo, un intenso aprendizaje y un buen descanso.
+%br
+.row
+  .span7
+    #map_canvas{ style: 'width: 100%; height: 630px' }
+  .span5
+    %ul.mapnav
+      %li{ style: 'font-weight: bold' }<
+        = link_to 'Hotel ‘Punta Sur’', 'http://www.puntasurhotel.com', :rel => 'nofollow'
+      %li<
+        %a{:href => 'http://www.aytotarifa.com', :rel => 'nofollow'}> Tarifa &mdash; capital de los vientos, el punto más meridional de Europa
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>10km
+      %li<
+        %a{:href => 'http://www.malagaairport.eu', :rel => 'nofollow'}> Aeropuerto de Málaga - Costa del Sol
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>158km         
+      %li<
+        %a{:href => 'http://www.fycma.com/', :rel => 'nofollow'}> Palacio de Ferias y Congresos de Málaga
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>166km
+      %li<
+        %a{:href => 'http://www.pta.es', :rel => 'nofollow'}> Parque tecnológico IDEA! en Málaga
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>173km
+      %li<
+        %a{:href => 'http://www.pctcartuja.es', :rel => 'nofollow'}> Parque tecnológico la Cartuja en Sevilla
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>203km
+      %li<
+        %a{:href => 'http://www.tecnobahia.es/', :rel => 'nofollow'}> Parque tecnológico TecnoBahía en Cádiz
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>110km
+      %li<
+        %a{:href => 'http://www.ronda.es', :rel => 'nofollow'}> Ronda &mdash; algo más que una hermosa ciudad histórica
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>126km
+      %li<
+        %a{:href => 'http://www.jerez.es/', :rel => 'nofollow'}> Jerez de la Frontera &mdash; patria del vino del mismo nombre: el jerez
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>104km
+      %li<
+        %a{:href => 'http://www.marbella.es', :rel => 'nofollow'}> Marbella &mdash; el famoso centro turístico en la Costa del Sol
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>110km
+      %li<
+        %a{:href => 'http://www.algeciras.es', :rel => 'nofollow'}> Algeciras &mdash; la zona comercial más cercana en la región
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>28km
+      %li<
+        %a{:href => 'http://es.wikipedia.org/wiki/T%C3%A1nger', :rel => 'nofollow'}>Tánger &mdash; una mezcla del colorido africano y las fábulas arábigas a sólo una hora de distancia en ferry
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>45km
+%br
+=render :partial => 'where_map'

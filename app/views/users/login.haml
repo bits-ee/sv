@@ -1,0 +1,22 @@
+-title t('user.login')
+.row
+  .span4
+    %h2= t('user.login')
+    %br
+    = form_tag login_users_url(:redirect => params[:redirect]), {:id => 'login_form', :class => 'column-form'} do
+      .label
+        = label_tag :email, User.human_attribute_name(:email)
+      .field
+        = email_field_tag :email, nil, :autofocus => true
+      .label
+        = label_tag :password, User.human_attribute_name(:password)
+      .field
+        = password_field_tag :password
+      %br
+      %br
+      =surround (submit_tag t('user.enter')), "" do
+        =link_to t('user.forgot_password.title'), forgot_password_path(), :style => 'padding-left: 1em;'
+  .span5{:style => 'padding-top: 3em;'}
+    =render :partial => 'layouts/third_party_login', :locals => {:signup_form => false}
+  .span3
+%br

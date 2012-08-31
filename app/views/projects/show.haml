@@ -1,0 +1,97 @@
+- title @project.name
+
+- if I18n.locale.to_s == 'en'
+  - contest_name = @project.contest.name_en
+- elsif I18n.locale.to_s == 'es'
+  - contest_name = @project.contest.name_es
+- else
+  - contest_name = @project.contest.name
+%article
+  %header
+    %h2.inline= "#{link_to(contest_name, contest_path(@project.contest_id), rel: 'start')} &rarr; #{@project.name}".html_safe
+    - if can_change_project?(@project)
+      = link_to t('common.edit'), edit_project_path(@project.id), class: 'button', style: 'margin-left: 1em'
+    - if can_delete_project?
+      = link_to t('common.delete'), project_path(@project.id), class: 'button', style: 'margin-left: 2em', method: :delete, confirm: t('project.delete_confirm')
+  .show{ style: 'margin-top: 1em' }
+    .row{ style: 'margin-top: 1em; margin-bottom: 1em' }
+      %figure.span12= image_tag @project.avatar.url(:medium), :style => 'max-width: 100%;'
+    .row
+      .span8
+        - if current_user and current_user.can_see_all_of(@project.id)
+          .label= label :project, :status
+          .field
+            %span{ class: project_status_color(@project.status) }= t("project.status.#{@project.status.downcase}")
+            .description.brevier.inline{ style: 'margin-left: 2em;' }= t("project.status_description.#{@project.status.downcase}")
+        - if current_user or (@project.synopsys and @project.synopsys.strip.present?)
+          .label= label :project, :synopsys
+          .field= @project.synopsys
+          %br
+        - unless @project.video_url.blank?
+          %div= embed_video(@project.video_url, 500, 300)
+          %br
+        -if current_user and current_user.can_see_all_of(@project.id)
+          %section
+            %header.not-publish
+              %h3= t('project.private_details')
+              .brevier= t('project.descriptions.private')
+            %br
+            .label= label :project, :details
+            .field= format_and_link(@project.details).html_safe
+            .label= label :project, :team
+            .field= format_and_link(@project.team).html_safe
+            .label= label :project, :business_model
+            .field= format_and_link(@project.business_model).html_safe
+            .label= label :project, :market
+            .field= format_and_link(@project.market).html_safe
+            .label= label :project, :competitors
+            .field= format_and_link(@project.competitors).html_safe
+            .label= label :project, :advantages
+            .field= format_and_link(@project.advantages).html_safe
+            .label= label :project, :technology
+            .field= format_and_link(@project.technology).html_safe
+            .label= label :project, :finance
+            .field= format_and_link(@project.finance).html_safe
+            .label= label :project, :current_stage
+            .field= format_and_link(@project.current_stage).html_safe
+            %br
+          %section.not-publish
+            %h3= t('project.documents.documents')
+            .brevier= t('project.documents.description1')
+            %ul.unstyled
+              -@project.project_docs.each do |project_doc|
+                %li<
+                  = link_to project_doc.doc.url, :class => 'with-image' do
+                    = document_icon(project_doc.doc.content_type)
+                    %span>= project_doc.doc.original_filename
+                  = "&nbsp;(#{number_to_human_size(project_doc.doc.size)});&nbsp;#{project_doc.description}".html_safe
+          %br
+          %br
+          - if current_user and current_user.can_comment?
+            %section
+              %h3= t('comment.comments')
+              = render :partial => 'comment/new', :locals => {:comment => Comment.new(:commentable_id => @project.id)}
+              = render :partial => 'comment/show', :collection => @project.comments.order('created_at desc'), :as => :comment
+      %footer.span4
+        - __user = @project.user
+        = image_tag __user.avatar.url(:thumb)
+        %h5= __user.full_name
+        %div= __user.role
+        %div= social_icons(__user)
+        %br
+        %div{ style: 'color: #999' }<= simple_format(__user.about)
+        - unless (@project.city.blank? and @project.url.blank? and @project.video_url.blank?)
+          %hr
+        - unless @project.city.blank?
+          %div= @project.city
+          %br
+        - unless @project.url.blank?
+          %div
+            = label :project, :url
+            %br
+            = link_to @project.url, @project.url, rel: 'external'
+          %br
+        - if __user.id == current_user_id and __user.avatar_file_name.blank?
+          %br
+          = link_to t('user.profile.edit_profile'), edit_user_path(current_user_id)
+  %br

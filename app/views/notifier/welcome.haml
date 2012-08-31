@@ -1,0 +1,9 @@
+= t('mail.welcome', :locale => @user.locale)
+%br
+%br
+=t('user.login', :locale => @user.locale)
+=@user.email
+%br
+=t('mail.fill_profile', :locale => @user.locale)
+.linktoclick{:style => 'margin: 2em 0em;'}
+  = link_to t('user.profile.edit_profile', :locale => @user.locale), edit_user_url(@user.id)

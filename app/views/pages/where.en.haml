@@ -1,0 +1,70 @@
+%h2.strong Where?
+%br
+.row
+  .span12.pica{ style: 'color: #666;' } 
+    Andalusia, the most southern province of Spain and the European tourist Mecca, was chosen as the perfect location for the Spanish Village international business accelerator. This region is famous for its splendid climate: 300 sunny days per year and the average annual air temperature of +18°C. The coast of Andalusia washed by the Atlantic Ocean and the Mediterranean Sea is perfect for bathing and also kite and wind surfing. Andalusia is widely known for its spectacular sea and mountain landscapes.
+%br
+.row
+  .span7
+    = image_tag 'hotelpuntasur.jpg', style: 'width: 100%', alt: 'Hotel Punta Sur'
+  .span5
+    %h4 Hotel Punta Sur
+    .nowrap{ style: 'color: #666;' } GPS-coordinates: Lat 36 03.604 N, Lng 5 39.946 W
+    %br
+    %em{ style: 'color: #666;' }<
+      %ul{ style: 'list-style: circle; margin-left: 1.5em' }
+        %li a three-star hotel 100 m from the ocean;
+        %li single rooms with air conditioning;
+        %li large premises with a pool and a tennis court;
+        %li three daily meals: breakfast buffet, three-course lunch and dinner, non-alcoholic beverages;
+        %li wireless internet.
+  
+.row
+  .span12
+    %p 
+      The sphere of technology in Andalusia is undergoing a rapid development stage: there are 11 technology parks and 8 technical universities in the territory of the autonomous community; more than 1.5 thousand companies operate in the sphere of ICT. There are representative offices of such market giants as IBM, Microsoft, Oracle, Ericsson, Fujitsu and others. Andalusia is the national leader as far as the spread of 3G internet is concerned. There is also a well-developed motor way and railway network and regular air connection with Russian and European capitals. 
+    %p 
+      %span The stimulating policy of the Andalusian authorities, clearly interested in cooperation with investors and full of ambition to host IT projects, is the key to the intensive development of the oldest European start-up community in the region. The members of the community gladly share their experience during numerous events that take place here all year round. This is why Andalusia is a perfect location for hosting a business accelerator camp and putting your project into action. You will have anything you might need for productive work, efficient studying and fun in your free time.
+%br
+.row
+  .span7
+    #map_canvas{ style: 'width: 100%; height: 630px' }
+  .span5
+    %ul.mapnav
+      %li{ style: 'font-weight: bold' }<
+        = link_to 'Hotel Punta Sur', 'http://www.puntasurhotel.com', :rel => 'nofollow'
+      %li<
+        %a{:href => 'http://www.aytotarifa.com', :rel => 'nofollow'}>Tarifa &mdash; “the capital of winds”, the southernmost point of Europe
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>10km
+      %li<
+        %a{:href => 'http://www.malagaairport.eu', :rel => 'nofollow'}>Pablo Ruiz Picasso Airport in Malaga
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>158km         
+      %li<
+        %a{:href => 'http://www.fycma.com/', :rel => 'nofollow'}>Exhibition centre in Malaga
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>166km
+      %li<
+        %a{:href => 'http://www.pta.es', :rel => 'nofollow'}>“IDEA!” technology park in Malaga
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>173km
+      %li<
+        %a{:href => 'http://www.pctcartuja.es', :rel => 'nofollow'}>“Cartuja” technology park in Seville
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>203km
+      %li<
+        %a{:href => 'http://www.tecnobahia.es/', :rel => 'nofollow'}>“TecnoBahia” technology park in Cadiz
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>110km
+      %li<
+        %a{:href => 'http://www.ronda.es', :rel => 'nofollow'}>Ronda &mdash; just a beautiful historical city
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>126km
+      %li<
+        %a{:href => 'http://www.jerez.es/', :rel => 'nofollow'}>Jerez &mdash; the home of the wine with the same name
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>104km
+      %li<
+        %a{:href => 'http://www.marbella.es/', :rel => 'nofollow'}>Marbella &mdash; a famous resort on Costa del Sol
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>110km
+      %li<
+        %a{:href => 'http://www.algeciras.es', :rel => 'nofollow'}>Algeciras &mdash; the nearest commercial area in the region
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>28km
+      %li<
+        %a{:href => 'http://en.wikipedia.org/wiki/Tangier', :rel => 'nofollow'}>Tangier – a one-hour ferry trip to the mixture of African colours and Arabian fairy tales
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>45km
+%br
+=render :partial => 'where_map'

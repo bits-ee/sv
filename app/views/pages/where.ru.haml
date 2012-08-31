@@ -1,0 +1,82 @@
+%h2.strong Где?
+%br
+.row
+  .span12.pica{ style: 'color: #666;' } 
+    Местом проведения выездного бизнес-акселератора «Spanish Village» была выбрана Андалусия &mdash; самая южная провинция Испании, европейская туристическая Мекка. Этот регион известен своим чудесным климатом: 300 солнечных дней в году, среднегодовая температура воздуха 18&deg;С. Берега Андалусии омываются водами Атлантического океана и Средиземного моря, которые прекрасно подходят как для купания, так и для кайт- и винд-сёрфинга. Андалусия славится великолепными морскими и горными пейзажами.
+%br
+.row
+  .span7
+    /.absolute{ style: 'background: rgba(0,0,0,0.3); padding: 0.2em 0.5em; color: #fff' } Динамический коллаж как на главной
+    = image_tag 'hotelpuntasur.jpg', style: 'width: 100%'
+  .span5
+    %h4 Отель &laquo;Punta Sur&raquo;
+    .nowrap{ style: 'color: #666;' } GPS-координаты: Lat 36 03.604 N, Lng 5 39.946 W
+    %br
+    %em{ style: 'color: #666;' }<
+      %ul{ style: 'list-style: circle; margin-left: 1.5em' }
+        %li трёхзвёздочный отель в 100м от океана;
+        %li индивидуальное размещение в номерах с кондиционером;
+        %li просторная территория с бассейном и теннисным кортом;
+        %li Трёхразовое питание (завтрак «шведский стол», обеды и ужины из трёх блюд, безалкогольные напитки);
+        %li беспроводный интернет.
+  
+.row
+  .span12
+    %p 
+      Андалусия стремительно развивается в технологическом плане: на территории автономии создано 11 технопарков, действует 8 технических вузов, в секторе ИКТ работает более 1,5 тысяч компаний. Свои представительства в регионе открыли такие гиганты, как IBM, Microsoft, Oracle, Ericsson, Fujitsu и другие. По охвату и проникновению мобильного интернета 3G Андалусия занимает лидирующее положение в Испании. Здесь развита сеть высокоскоростных автомагистралей и железных дорог, осуществляются регулярные авиарейсы в Россию и столицы европейских государств. 
+    %p 
+      %span Благодаря стимулирующей политике властей Андалусии, заинтересованных в сотрудничестве с инвесторами и полных амбиций относительно реализации у себя ИТ-проектов, в этом регионе активно развивается старейшее в Европе стартап-сообщество. Его участники охотно делятся своим опытом на многочисленных мероприятиях, которые здесь проводятся в течение всего года. Это делает Андалусию идеальным местом проведения бизнес-акселератора и реализации своего проекта. В твоем распоряжении будет все, что может понадобится для эффективной работы, интенсивной учебы и отличного отдыха.
+%br
+.row
+  .span7
+    #map_canvas{ style: 'width: 100%; height: 630px' }
+  .span5
+    %ul.mapnav
+      %li{ style: 'font-weight: bold' }<
+        = link_to 'Отель «Punta Sur»', 'http://www.puntasurhotel.com', :rel => 'nofollow'
+      %li<
+        %a{:href => 'http://www.aytotarifa.com', :rel => 'nofollow'}>Тарифа
+        &mdash; столица ветров, самая южная точка Европы
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>10км
+      %li<
+        %a{:href => 'http://www.malagaairport.eu', :rel => 'nofollow'}>Аэропорт им. Пабло Пикассо
+        &nbsp;в Малаге
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>158км
+      %li<
+        %a{:href => 'http://www.fycma.com/', :rel => 'nofollow'}>Выставочный центр
+        &nbsp;в Малаге
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>166км
+      %li<
+        %a{:href => 'http://www.pta.es', :rel => 'nofollow'}>Технопарк «IDEA!»
+        &nbsp;в Малаге
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>173км
+      %li<
+        %a{:href => 'http://www.pctcartuja.es', :rel => 'nofollow'}>Технопарк «Cartuja»
+        &nbsp;в Севилье
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>203км
+      %li<
+        %a{:href => 'http://www.tecnobahia.es/', :rel => 'nofollow'}>Технопарк «TecnoBahia»
+        &nbsp;в Кадисе
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>110км
+      %li<
+        %a{:href => 'http://www.ronda.es', :rel => 'nofollow'}>Ронда
+        &nbsp;&mdash; просто красивый исторический город
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>126км
+      %li<
+        %a{:href => 'http://www.jerez.es/', :rel => 'nofollow'}>Херес
+        &nbsp;&mdash; родина одноимённого вина
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>104км
+      %li<
+        %a{:href => 'http://i-marbella.ru', :rel => 'nofollow'}>Марбелья
+        &nbsp;&mdash; знаменитый курорт на побережье «Коста дель Соль»
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>110км
+      %li<
+        %a{:href => 'http://www.algeciras.es', :rel => 'nofollow'}>Альхесирас
+        &nbsp;&mdash; ближайшая торговая зона в регионе
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>28км
+      %li<
+        %a{:href => 'http://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%BD%D0%B6%D0%B5%D1%80', :rel => 'nofollow'}>Танжер
+        &nbsp;&mdash; смесь африканского колорита и арабских сказок в часе езды на пароме
+        %span.brevier.relative{ style: 'top: -5px; color: #999'}>45км
+%br
+=render :partial => 'where_map'

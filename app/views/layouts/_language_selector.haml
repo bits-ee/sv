@@ -1,0 +1,11 @@
+- case I18n.locale.to_s
+  - when 'ru'
+    = image_tag 'ru.png'
+  - when 'en'
+    = image_tag 'gb.png'
+  - when 'es'
+    = image_tag 'es.png'
+%select.languages{ style: 'margin: 0.1em; padding: 0' }
+  %option{ 'data-action' => url_for( locale: 'ru' ), selected: (I18n.locale.to_s == 'ru') } Русский
+  %option{ 'data-action' => url_for( locale: 'en' ), selected: (I18n.locale.to_s == 'en') } English
+  %option{ 'data-action' => url_for( locale: 'es' ), selected: (I18n.locale.to_s == 'es') } Español

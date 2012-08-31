@@ -1,0 +1,208 @@
+-title @user.full_name
+-@user = current_user unless @user
+.widget
+  %section
+    %div
+      = form_for @user, :html => {:class => 'column-form', :style => 'margin-left: 1em;', :multipart => true} do |f|
+        %h2.inline{:style => 'margin-right: 1em;'}=@user.full_name
+        %span<>
+          =f.submit(t('common.save'))+"&nbsp;#{t('common.or')}&nbsp;".html_safe + link_to(t('common.cancel').mb_chars.downcase, :back)
+        %br>
+        %br
+        .not-publish
+          %h3= t('project.public_details')
+          .brevier
+            = t('project.descriptions.public')
+            - if current_user_id == @user.id and current_user.is_owner_of_public_project? @user.project
+              .red
+                =t('project.read_only_public_fields')
+        %br>
+        %br
+        #user-info
+          - if current_user_id == @user.id and current_user.is_owner_of_public_project? @user.project
+            = image_tag @user.avatar.url(:thumb)
+          -else
+            - if @user.avatar_file_name.present? and !@user.avatar.dirty?
+              = image_tag @user.avatar.url(:thumb)
+              %span>
+                =f.check_box(:remove_avatar) + "&nbsp;".html_safe + f.label(:remove_avatar, User.human_attribute_name(:remove_avatar))
+            - else
+              = image_tag @user.avatar.url(:thumb), :style => 'display: block; margin-bottom: 0.5em;'
+              .field
+                .description.brevier=t('common.avatar.description') + number_to_human_size(1.megabyte)
+                = f.file_field :avatar, :style => 'width: 200px;'
+        - if current_user.is_priority?
+          .label.inline<
+            =f.label :user_type
+            =':&nbsp;'.html_safe
+          %span>=t("user.user_type.#{@user.user_type.downcase}")
+          %br
+          %br
+          .label.inline<
+            =f.label :status
+          %span{:class => @user.is_disabled? ? 'red' : ''}>=":&nbsp;#{t("user.status.#{@user.status.downcase}")}&nbsp;".html_safe
+          -if current_user and current_user.is_admin? and current_user.id != @user.id
+            -if @user.status == User.status_disabled
+              =link_to t('user.status_todo.activate'), toggle_user_path(:id => @user.id, :status => 1), {:class => 'button', :title => t('user.status_todo.activate_title')}
+            -elsif [User.status_active, User.status_invited].include? @user.status
+              =link_to t('user.status_todo.disable'), toggle_user_path(:id => @user.id, :status => 0), {:class => 'button', :title => t('user.status_todo.disable_title')}
+          %br>
+          %br
+          - if @user.is_priority?
+            .label.inline.form-checkbox<>
+              =f.label :is_admin
+              ="&nbsp;".html_safe
+            %span.form-checkbox<>
+              - if current_user.is_admin?
+                =f.check_box :is_admin, :class => 'admin-checkbox'
+              - else
+                =f.check_box :is_admin, :disabled => 'disabled'
+            %br>
+            %br
+            - show_notify = @user.is_admin? ? 'display: inline' : 'display: none'
+            .label.form-checkbox.receive-notifications{:style => show_notify}<>
+              =f.label :receive_notifications, :title => t('user.descriptions.receive_notifications')
+              ="&nbsp;".html_safe
+            %span.form-checkbox.receive-notifications{:style => show_notify}<>
+              - if current_user.is_admin?
+                =f.check_box :receive_notifications, :title => t('user.descriptions.receive_notifications')
+              - else
+                =f.check_box :receive_notifications, {:disabled => 'disabled', :title => t('user.descriptions.receive_notifications')}
+            %span.receive-notifications{:style => show_notify}>
+              %br>
+              %br
+          .label
+            = f.label :group
+          .field
+            = f.select :group, ({ t('user.user_groups.nobody') => 0, t('user.user_groups.orgs') => 1, t('user.user_groups.admins') => 2, t('user.user_groups.lectors') => 3, t('user.user_groups.mentors') => 4, t('user.user_groups.guests') => 5, t('user.user_groups.alumnis') => 6}), disabled: !current_user.is_admin?
+        -if current_user.is_admin?
+          .label
+            = f.label :group_order_number, :title => t('user.descriptions.group_order_number')
+          .field
+            = f.text_field :group_order_number
+          %br
+          %br
+        .label
+          =f.label :name
+        .field
+          - if current_user_id == @user.id and current_user.is_owner_of_public_project? @user.project
+            = @user.name
+          - else
+            =f.text_field :name
+        -if current_user.is_admin?
+          .label
+            =f.label :name_en
+          .field
+            =f.text_field :name_en
+          .label
+            =f.label :name_es
+          .field
+            =f.text_field :name_es
+          %br
+          %br
+          
+        .label
+          =f.label :role
+        .field
+          .description.brevier=t('user.descriptions.role') if @user.is_lector? or @user.is_priority?
+          - if current_user_id == @user.id and current_user.is_owner_of_public_project? @user.project
+            = @user.role
+          -else
+            =f.text_field :role
+        -if current_user.is_admin?
+          .label
+            =f.label :role_en
+          .field
+            =f.text_field :role_en
+          .label
+            =f.label :role_es
+          .field
+            =f.text_field :role_es
+          %br
+          %br
+          
+        .label
+          =f.label :email
+        .field
+          - if current_user_id == @user.id and current_user.is_owner_of_public_project? @user.project
+            = @user.email
+          -else
+            =f.email_field :email
+        .label
+          =f.label :skype
+        .field
+          .description.brevier=t('user.descriptions.skype')
+          =f.text_field :skype
+        .label
+          =f.label :twitter
+        .field
+          .description.brevier=t('user.descriptions.twitter')
+          =f.text_field :twitter
+        .label
+          =f.label :linkedin
+        .field
+          .description.brevier=t('user.descriptions.linkedin')
+          =f.url_field :linkedin, {:class => 'wide'}
+        .label
+          =f.label :blog
+        .field
+          .description.brevier=t('user.descriptions.blog')
+          =f.url_field :blog, {:class => 'wide'}
+        .label
+          =f.label :about
+        .field
+          .description.brevier=t('user.descriptions.about')
+          - if current_user_id == @user.id and current_user.is_owner_of_public_project? @user.project
+            = @user.about
+          - else
+            =f.text_area :about, :size => "80x5"
+        
+        -if current_user.is_admin?
+          .label
+            =f.label :about_en
+          .field
+            .description.brevier=t('user.descriptions.about_en')
+            =f.text_area :about_en, :size => "80x5"
+          .label
+            =f.label :about_es
+          .field
+            .description.brevier=t('user.descriptions.about_es')
+            =f.text_area :about_es, :size => "80x5"
+        
+        .label
+          =f.label :locale
+        .field
+          .description.brevier=t('user.descriptions.locale')
+          = f.select :locale, ({ "Русский" => 'ru', "English" => 'en', "Español" => 'es'})
+        %br
+        -#.label
+        -#  =f.label :feedback
+        -#.field
+        -#  .description.brevier=t('user.descriptions.feedback')
+        -#  =f.text_area :feedback, :size => "80x5"
+        -#%br
+        =f.submit t('common.save')
+      %br
+      %br
+      %br
+      - if current_user and current_user_id == @user.id and current_user.password_digest.present?
+        %h3
+          =t('user.profile.change_password')
+        = form_for @user, :html => {:class => 'column-form', :style => 'margin-left: 1em;'} do |f|
+          %br>
+          .label
+            =f.label :current_password
+          .field
+            =f.password_field :current_password
+          .label
+            =f.label :password, User.human_attribute_name(:new_password)
+          .field
+            =f.password_field :password
+          .label
+            =f.label :password_confirmation
+          .field
+            =f.password_field :password_confirmation
+          %br>
+          %br
+          =f.submit t('user.profile.change_password')
+        %br

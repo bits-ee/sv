@@ -1,0 +1,7 @@
+.comment.measure{ id: dom_id(comment), style: 'margin-bottom: 1em; __border: 1px solid black;' }
+  .header{ style: 'color: #f60'}
+    -#%strong= comment.title #subject?
+    %strong>= comment.user.name rescue nil
+    %small{ style: 'margin-left: 1em' }>= l(comment.created_at, :format => :short)
+  .body
+    =comment.body

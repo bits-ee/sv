@@ -1,0 +1,175 @@
+body
+  background-color: $white
+  margin: 0
+  @include serif-font(normal,$basefont,$baseline)
+  color: $grayDark
+
+// Container (centered, fixed-width layouts)
+.container, .container-fixed
+  @include fixed-container()
+
+// Fluid layouts (left aligned, with sidebar, min- & max-width content)
+.container-fluid
+  position: relative
+  min-width: $siteWidth
+  padding-left: 20px
+  padding-right: 20px
+  @include clearfix()
+  > .sidebar
+    position: absolute
+    top: 0
+    left: 20px
+    width: 220px
+  > .content
+    margin-left: 240px
+
+// BASE STYLES
+a
+  color: $linkColor
+  outline: none
+  text-decoration: underline
+  line-height: inherit
+  font-weight: inherit
+  &:hover
+    color: $linkColorHover
+    //text-decoration: underline
+  &:active
+    color: $linkColorActive
+    position: relative
+    top: 0.1em
+  &:visited
+    color: $linkColorVisited
+  // additional styles
+  &.delete, &.cancel
+    color: $linkColorCancel !important
+  &.shallow
+    text-decoration: none
+    border-bottom: 0.1em dotted
+  &.nodecor, &.no-decor
+    text-decoration: none
+  &.with-image
+    text-decoration: none
+    > img
+      vertical-align: text-bottom
+      margin-right: 0.3em
+    > span
+      color: inherit
+      text-decoration: underline
+    &.shallow
+      border-bottom: 0
+      > span
+        text-decoration: none
+        border-bottom: 0.1em dotted
+  //
+  &[href=''], &[href='#']
+    &:visited
+      color: $linkColor
+    &:hover
+      color: $linkColorHover
+    &:active
+      color: $linkColorActive
+
+// SCTRUCTURAL
+.pull-right, .float-right, .floatright
+  float: right
+
+.pull-left, .float-left, .floatleft
+  float: left
+
+.hide, .hidden
+  display: none
+
+.show
+  display: block
+
+.inline
+  display: inline !important
+
+.block
+  display: block !important
+
+.inline-block
+  display: inline-block !important
+
+.invisible
+  visibility: hidden !important
+
+.visible
+  visibility: visible !important
+
+.clearfix
+  @include clearfix
+
+.clear-both, .clearboth, .clear
+  clear: both
+
+.clear-right, .clearright
+  clear: right
+
+.clear-left, .clearleft
+  clear: left
+
+.absolute
+  position: absolute !important
+
+.relative
+  position: relative !important
+
+.fixed
+  position: fixed !important
+
+.text-center
+  text-align: center
+
+.nowrap, .no-wrap
+  white-space: nowrap
+
+.noselect, .no-select
+  @include noselect()
+
+// GRID SYSTEM
+.row
+  @include clearfix()
+  margin-left: -1 * $gridGutterWidth
+
+.row > [class*="span"]
+  @include gridColumn()
+
+@for $i from 1 through 24
+  .span#{$i}
+    @include columns($i)
+
+.row
+  @for $i from 1 through 12
+    > .offset#{$i}
+      @include offset($i)
+
+// SYSTEM HELP
+.translation_missing, .translation-missing, .tm
+  text-decoration: inherit
+  background-color: #ffc
+  color: #666
+
+.todo
+  display: inline
+  background-color: rgba(255,150,150,0.9)
+  color: #333
+
+//.field_with_errors
+//  input
+//    outline: 2px solid #d00
+//  label
+//    color: #d00
+
+label.field_with_errors, .field_with_errors label
+  $transition: color linear .2s
+  @include transition($transition)
+  color: #d00
+
+input.field_with_errors, textarea.field_with_errors, .field_with_errors input, .field_with_errors textarea
+  outline: 0
+  border-color: rgba(221,0,0,.8) !important
+  &:focus
+    $shadow: inset 0 1px 3px rgba(0,0,0,.1), 0 0 6px rgba(221,0,0,.6)
+    @include box-shadow($shadow)
+

@@ -1,0 +1,169 @@
+@mixin advanced-button($color) 
+  //$color-text: #333333
+  //$color-up: #f7f7f7
+  //$color-down: #dddddd
+  $color-text: #ffffff
+  //$color: #ff6600
+  //$color: $color
+  $color-up: lighten($color, 5%)
+  $color-down: darken($color, 10%)
+  $color-middle: $color-up - ($color-up - $color-down) / 2
+  
+  @if lightness($color) > 50
+    $color-text: darken($color-up, 60%)
+  @else
+    $color-text: lighten($color-up, 60%)  
+
+  :display inline
+  // background
+  :background $color-middle
+  :background -webkit-gradient(linear, 0% 0%, 0% 100%, from($color-up), to($color-down))
+  :background -moz-linear-gradient(top, $color-up, $color-down)
+  // shadows 
+  //:box-shadow inset 0 1px 0 lighten($color-up, 20%)
+  //:-webkit-box-shadow inset 0 1px 0 lighten($color-up, 20%)
+  //:-moz-box-shadow inset 1px 1px 0px white, 1px 1px 0 rgba(0, 0, 0, 0.1)
+  // borders
+  :border 1px solid darken($color, 25%)
+  :border-radius 3px !important
+  :-webkit-border-radius 3px
+  :-moz-border-radius 3px
+  // text decorations
+  @if lightness($color) > 50
+    :text-shadow 0 1px 0px lighten($color, 10%) 
+  @else
+    :text-shadow 0 -1px 0px darken($color, 10%)    
+  :color $color-text
+  
+  // special fixes
+  :outline none
+  :cursor pointer
+  :background-clip padding-box !important
+  :-webkit-background-clip padding-box !important
+  :-moz-background-clip padding-box !important
+  :-webkit-user-select none
+  :-moz-user-select none
+  &::-moz-focus-inner
+    :border 0
+    
+  &:active, &:disabled
+    //:top 0
+    :background -webkit-linear-gradient(top, darken($color-up,5%), darken($color-down,5%)) !important
+    :color darken($color-text, 5%) !important    
+    :box-shadow none !important
+    :box-shadow inset 0 1px 1px darken($color-up, 20%) !important
+  &:hover, &:visited:hover
+    :border 1px solid darken($color, 20%)
+    :box-shadow inset 0 1px 0 lighten($color-up, 15%), 0 1px 1px transparentize(desaturate(darken($color-down, 25%), 50%), 0.6)
+    :background darken($color-middle, 3%)
+    :background -webkit-linear-gradient(top, lighten($color-up,3%), lighten($color-down,3%))
+    :background -moz-linear-gradient(top, darken($color-up, 3%), darken($color-down, 3%))
+    :background-clip padding-box !important
+    :-webkit-background-clip padding-box !important
+    :-moz-background-clip padding-box !important
+    :color lighten($color-text, 10%)
+  &:visited
+    :color $color-text
+
+select, textarea, input, option, button
+  :box-sizing border-box
+  :-ms-box-sizing border-box
+  :-moz-box-sizing border-box
+  :-webkit-box-sizing border-box
+  // new
+  //:padding 0
+  //:margin 0
+  
+//select  
+//  :padding 0.45em
+
+// input[type="text"], input[type="password"],
+input, select, textarea, button, .button
+  :text-decoration none
+  :border-width 1px
+  :border-style solid
+  :border-color #ccc #999 #999 #ccc
+  :background-color #fafafa
+  //
+  :padding 0.5em
+  :margin 0
+  :outline none
+  //  
+  //:box-shadow inset 1px 1px 0px #fff, 1px 1px 0 rgba(0, 0, 0, 0.10)
+  //:-webkit-box-shadow inset 1px 1px 0px #fff, 1px 1px 0 rgba(0, 0, 0, 0.10)
+  //:-moz-box-shadow inset 1px 1px 0px #fff, 1px 1px 0 rgba(0, 0, 0, 0.10)
+  :box-shadow 1px 1px 0 rgba(0, 0, 0, 0.10)
+  :-webkit-box-shadow 1px 1px 0 rgba(0, 0, 0, 0.10)
+  :-moz-box-shadow 1px 1px 0 rgba(0, 0, 0, 0.10)  
+  
+input[type="text"], input[type="password"], input[type="url"]
+  &:focus
+    :background-color #ffc !important
+  &:hover
+    :background-color #ffe
+  &.wide
+    :width 400px
+
+input[type="submit"], input[type="reset"], input[type="button"], button, .button
+  @include advanced-button(#ddd)
+
+.button-cta
+  @include advanced-button(#f60)
+  :font-size 12pt
+  :padding 0.3em 0.5em
+  
+  
+.button-facebook
+  @include advanced-button(#46a)
+  padding: 0.3em 0.8em
+  display: block
+  display: inline-block
+  width: 110px
+  img 
+    margin: 0 auto 
+    display: block
+    
+.button-vkontakte
+  @include advanced-button(#3a70a5)
+  padding: 0.3em 0.8em
+  display: block
+  display: inline-block
+  width: 110px
+  img 
+    margin: 0 auto 
+    display: block
+
+.button-google_oauth2
+  @include advanced-button(#f3f3f3)
+  padding: 0.3em 0.8em
+  display: block
+  display: inline-block
+  width: 110px  
+  img
+    margin: 0 auto 
+    display: block
+  
+input[type="checkbox"], input[type="radio"]
+  :border none
+  :background transparent
+  :box-shadow none
+  
+input[type="file"]
+  //:padding 0.4em
+  //:background #eee
+  :box-shadow none
+
+form
+  label 
+    :font-weight bold
+  .field
+    :margin-bottom 1em
+  .description
+    :width 70em
+    //:display inline-block
+    //:padding 0.5em
+    //:background #ff9
+    //:box-shadow 1px 1px 0 rgba(0, 0, 0, 0.10)
+    :color #666
+    //:font normal normal normal 8pt/16pt sans-serif
+    //:line-height 1.2em
